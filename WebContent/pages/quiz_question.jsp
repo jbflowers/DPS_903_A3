@@ -1,3 +1,5 @@
+<jsp:useBean id="quiz" scope="session" class="controller.QuizBean"/>
+<jsp:setProperty name='quiz' property="*"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Quiz Question <%= quiz.questionNumber %></title>
+    <title>Quiz Question <jsp:getProperty name="quiz" property="currentQuestion"/> </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -377,7 +379,7 @@
  
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Take a Quiz</h1>
+                    <h1 class="page-header">Quiz Question <jsp:getProperty name="quiz" property="currentQuestion"/></h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -391,8 +393,7 @@
 		                </div>
 		                <div class="panel-body">
 		                    <p>
-		                    	By clicking on the "let's do this" button, you'll start a randomly generated quiz with questions created by your teacher.
-		                    	This quiz will have 6 questions with varying weights and your results will be shown to you at the end. There is a 20 minute time limit.
+		
 		                    </p>
 		                </div>
 		                <div class="panel-footer">
