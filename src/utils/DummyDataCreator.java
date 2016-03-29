@@ -10,6 +10,45 @@ import model.Quiz;
 public class DummyDataCreator {
 	private static DBManager dbm = new DBManager();
 	
+	public static void generateQuiz(){
+		// Make your quiz
+		Quiz quiz = new Quiz();
+		List<Question> questions = generateQuizQuestions();
+		quiz.setQuestions(questions);
+		quiz.setAllowHints(true);
+		
+		// Store it
+		dbm.commitQuiz(quiz);
+		System.out.println("made it here!");
+	}
+	
+	
+	// Makes a list of questions composed of 3 easy, 2 medium, and 1 hard
+	public static List<Question> generateQuizQuestions(){
+		List<Question> questions = new ArrayList<Question>();
+
+		// Make three easy questions
+		while(questions.size() != 3){
+			Question easyQuestion = dbm.getRandomEasyQuestion();
+			if (!questions.contains(easyQuestion)){
+				questions.add(easyQuestion);
+			}
+		}
+		
+		// Make two unique medium questions
+		while(questions.size() != 5){
+			Question mediumQuestion = dbm.getRandomMediumQuestion();
+			if (!questions.contains(mediumQuestion)){
+				questions.add(mediumQuestion);
+			}
+		}
+		
+		// Make one hard question
+		questions.add(dbm.getRandomHardQuestion());
+		
+		return questions;
+	}
+	
 	public static void generateQuestions(){
 		// Make first question
 		Question q1 = new Question();
@@ -163,10 +202,15 @@ public class DummyDataCreator {
 	}
 	
 	public static void main(String args[]){
-		//generateQuestions();
+		/*
+		
+		
 		List<Question> easyQuestions = dbm.getEasyQuestions();
 		for(Question question : easyQuestions){
 			System.out.println(question.getText());
 		}
+		*/
+		generateQuestions();
+		//generateQuiz();
 	}
 }

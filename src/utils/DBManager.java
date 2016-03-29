@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.List;
+import java.util.Random;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -33,6 +34,13 @@ public class DBManager {
     }
     
     public int commitQuiz(Quiz quiz){
+    	for(Question question : quiz.getQuestions()){
+    		commitQuestion(question);
+    	}
+    	for(Message message : quiz.getMessages()){
+    		commitMessage(message);
+    	}
+    	
     	em.getTransaction().begin();
     	em.persist(quiz);
     	em.getTransaction().commit();
@@ -69,6 +77,37 @@ public class DBManager {
     public List<Question> getEasyQuestions(){
     	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e WHERE e.difficulty='easy'").getResultList();
     	return questions;
+    }
+    
+    public List<Question> getMediumQuestions(){
+    	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e WHERE e.difficulty='medium'").getResultList();
+    	return questions;
+    }
+    
+    public List<Question> getHardQuestions(){
+    	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e WHERE e.difficulty='hard'").getResultList();
+    	return questions;
+    }
+    
+    public Question getRandomEasyQuestion(){
+    	List<Question> questions = getEasyQuestions();
+    	Random rand = new Random();
+    	int randNum = rand.nextInt((questions.size()-1) + 1);
+    	return questions.get(randNum);
+    }
+    
+    public Question getRandomMediumQuestion(){
+    	List<Question> questions = getMediumQuestions();
+    	Random rand = new Random();
+    	int randNum = rand.nextInt((questions.size()-1) + 1);
+    	return questions.get(randNum);
+    }
+    
+    public Question getRandomHardQuestion(){
+    	List<Question> questions = getHardQuestions();
+    	Random rand = new Random();
+    	int randNum = rand.nextInt((questions.size()-1) + 1);
+    	return questions.get(randNum);
     }
     
     public int commitQuestion(Question question){

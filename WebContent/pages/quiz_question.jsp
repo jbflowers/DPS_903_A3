@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Quiz Question <jsp:getProperty name="quiz" property="currentQuestion"/> </title>
+    <title>Quiz Question <jsp:getProperty name="quiz" property="currentQuestionNumber"/> </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -379,7 +379,7 @@
  
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Quiz Question <jsp:getProperty name="quiz" property="currentQuestion"/></h1>
+                    <h1 class="page-header">Quiz Question <jsp:getProperty name="quiz" property="currentQuestionNumber"/></h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

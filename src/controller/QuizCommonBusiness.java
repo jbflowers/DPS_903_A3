@@ -1,5 +1,8 @@
 package controller;
 
+import model.Question;
+
 public interface QuizCommonBusiness {
-	int getCurrentQuestion();
+	int getCurrentQuestionNumber();
+	Question getCurrentQuestion();
 }

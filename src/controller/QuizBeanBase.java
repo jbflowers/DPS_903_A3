@@ -2,42 +2,70 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
-import org.eclipse.persistence.platform.database.DB2MainframePlatform;
+import javax.annotation.PostConstruct;
 
 import model.Question;
 import model.Quiz;
 import utils.DBManager;
 
 public class QuizBeanBase implements QuizCommonBusiness{
-	private int currentQuestion;
-	private Quiz quiz;
-	private DBManager dbm;
-	
+	private int currentQuestionNumber;
+	protected Quiz quiz;
+	protected DBManager dbm;
 	
 	public QuizBeanBase(){
-		quiz = new Quiz();
+		System.out.println("MADE IT HERE");
+		
+		// Initialize db manager and other fields
 		dbm = new DBManager();
-		currentQuestion = 1;
+		currentQuestionNumber = 1;
 		
-		ArrayList<Question> questions = generateQuestions();
-	}
-	
-	private ArrayList<Question> generateQuestions(){
-		List<Question> questions = dbm.getQuestions();
+		// Make your quiz
+		quiz = new Quiz();
 		
-		for(Question question: questions){
-			//if()
+		// Make questions
+		List<Question> questions = new ArrayList<Question>();
+
+		// Make three easy questions
+		while(questions.size() != 3){
+			Question easyQuestion = dbm.getRandomEasyQuestion();
+			if (!questions.contains(easyQuestion)){
+				questions.add(easyQuestion);
+			}
 		}
 		
+		// Make two unique medium questions
+		while(questions.size() != 5){
+			Question mediumQuestion = dbm.getRandomMediumQuestion();
+			if (!questions.contains(mediumQuestion)){
+				questions.add(mediumQuestion);
+			}
+		}
 		
-		return null;
+		// Make one hard question
+		questions.add(dbm.getRandomHardQuestion());
+		
+		// Set fields
+		quiz.setQuestions(questions);
+		quiz.setAllowHints(true);
+		quiz.setDescription("TEMP");
+		quiz.setName("TEST");
+		
+		// Store it
+		dbm.commitQuiz(quiz);
 	}
 	
 	@Override
-	public int getCurrentQuestion() {
-		// TODO Auto-generated method stub
-		return currentQuestion;
+	public int getCurrentQuestionNumber() {
+		return currentQuestionNumber;
+		
+	}
+
+	@Override
+	public Question getCurrentQuestion() {
+		return quiz.getQuestions().get(currentQuestionNumber);
 	}
 
 }
