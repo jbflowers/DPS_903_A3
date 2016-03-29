@@ -1,6 +1,9 @@
 package bean.question;
 
 import javax.annotation.PreDestroy;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import model.Question;
 
@@ -10,7 +13,9 @@ public class QuestionBeanBase implements QuestionCommonBusiness{
     //private int currentQuestionNumber;
     protected Question question;
     protected DBManager dbm;
-
+	private EntityManager em;
+    
+    
     public QuestionBeanBase(){
         System.out.println("Constructing a question...");
 

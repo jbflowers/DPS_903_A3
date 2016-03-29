@@ -12,7 +12,7 @@
 		questionResponse.incrementAttempts();
 	}
 	
-	Thread.sleep(5000); // sleep 1 seconds
+	//Thread.sleep(5000); // sleep 1 seconds
 	response.sendRedirect("quiz_question.jsp");
 %>
 </HTML>

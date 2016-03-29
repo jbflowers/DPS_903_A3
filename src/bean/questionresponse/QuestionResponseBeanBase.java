@@ -3,6 +3,9 @@ package bean.questionresponse;
 import java.util.List;
 
 import javax.annotation.PreDestroy;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import model.Answer;
 import model.Question;
@@ -13,8 +16,7 @@ public class QuestionResponseBeanBase implements QuestionResponseCommonBusiness{
 	private QuestionResponse questionResponse;
 	private int attempts;
 	protected DBManager dbm;
-	
-	
+	private EntityManager em;
 	
 	public QuestionResponseBeanBase(){
 		// Initialize db manager and other fields

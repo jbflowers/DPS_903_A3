@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PreDestroy;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import model.Question;
 import model.Quiz;
@@ -13,6 +16,7 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	private int currentQuestionNumber;
 	protected Quiz quiz;
 	protected DBManager dbm;
+	private EntityManager em;
 	
 	public QuizBeanBase(){
 		System.out.println("MADE IT HERE YAY");

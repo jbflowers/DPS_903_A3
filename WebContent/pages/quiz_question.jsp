@@ -489,11 +489,9 @@
 			
 			                    </p>
 			                </div>
-		                <div class="panel-footer">
-						<button type="submit" class="btn btn-default submit-button">Submit</button>
-						
-						<a href="process_question_response.jsp"> Go to next question </a>
-		                </div>
+			                <div class="panel-footer">
+								<button type="submit" class="btn btn-default submit-button">Submit</button>
+			                </div>
 		                </form>
 		                
 	                </div>
@@ -529,12 +527,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-
-	<script>
-	$(document).ready(function() {
-		$(".submit-button").on("click", function(){ console.log("I'm trying to redirect now!"); window.location.replace("process_question_response.jsp"); });
-	});
-	</script>
 
 </body>
 
