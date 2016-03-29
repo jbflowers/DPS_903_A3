@@ -1,6 +1,7 @@
 package utils;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -26,8 +27,8 @@ public class DBManager {
     	//em.getTransaction().begin();
     }
     
-    public ArrayList<Quiz> getQuizzes(){
-    	ArrayList<Quiz> quizzes = (ArrayList<Quiz>) em.createQuery("SELECT e FROM Quiz e").getResultList();
+    public List<Quiz> getQuizzes(){
+    	List<Quiz> quizzes = (List<Quiz>) em.createQuery("SELECT e FROM Quiz e").getResultList();
     	return quizzes;
     }
     
@@ -43,8 +44,8 @@ public class DBManager {
     	return quiz;
     }
    
-    public ArrayList<QuizResponse> getQuizResponses(){
-    	ArrayList<QuizResponse> quizResponses = (ArrayList<QuizResponse>) em.createQuery("SELECT e FROM QuizResponse e").getResultList();
+    public List<QuizResponse> getQuizResponses(){
+    	List<QuizResponse> quizResponses = (List<QuizResponse>) em.createQuery("SELECT e FROM QuizResponse e").getResultList();
     	return quizResponses;
     }
     
@@ -60,8 +61,13 @@ public class DBManager {
     	return quizResponse;
     }
     
-    public ArrayList<Question> getQuestions(){
-    	ArrayList<Question> questions = (ArrayList<Question>) em.createQuery("SELECT e FROM Question e").getResultList();
+    public List<Question> getQuestions(){
+    	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e").getResultList();
+    	return questions;
+    }
+    
+    public List<Question> getEasyQuestions(){
+    	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e WHERE e.difficulty='easy'").getResultList();
     	return questions;
     }
     
@@ -80,8 +86,8 @@ public class DBManager {
     	return question;
     }
     
-    public ArrayList<QuestionResponse> getQuestionResponses(){
-    	ArrayList<QuestionResponse> questionResponses = (ArrayList<QuestionResponse>) em.createQuery("SELECT e FROM QuestionResponse e").getResultList();
+    public List<QuestionResponse> getQuestionResponses(){
+    	List<QuestionResponse> questionResponses = (List<QuestionResponse>) em.createQuery("SELECT e FROM QuestionResponse e").getResultList();
     	return questionResponses;
     }
     
@@ -96,8 +102,8 @@ public class DBManager {
     	return questionResponse;
     }
     
-    public ArrayList<SubQuestion> getSubQuestions(){
-    	ArrayList<SubQuestion> subQuestions = (ArrayList<SubQuestion>) em.createQuery("SELECT e FROM SubQuestion e").getResultList();
+    public List<SubQuestion> getSubQuestions(){
+    	List<SubQuestion> subQuestions = (List<SubQuestion>) em.createQuery("SELECT e FROM SubQuestion e").getResultList();
     	return subQuestions;
     }
     
@@ -113,8 +119,8 @@ public class DBManager {
     	return subQuestion;
     }
     
-    public ArrayList<Answer> getAnswers(){
-    	ArrayList<Answer> answers = (ArrayList<Answer>) em.createQuery("SELECT e FROM Answer e").getResultList();
+    public List<Answer> getAnswers(){
+    	List<Answer> answers = (List<Answer>) em.createQuery("SELECT e FROM Answer e").getResultList();
     	return answers;
     }
     
@@ -130,8 +136,8 @@ public class DBManager {
     	return answer;
     }
     
-    public ArrayList<Message> getMessages(){
-    	ArrayList<Message> messages = (ArrayList<Message>) em.createQuery("SELECT e FROM Message e").getResultList();
+    public List<Message> getMessages(){
+    	List<Message> messages = (List<Message>) em.createQuery("SELECT e FROM Message e").getResultList();
     	return messages;
     }
     
@@ -147,8 +153,8 @@ public class DBManager {
     	return message;
     }
     
-    public ArrayList<User> getUsers(){
-    	ArrayList<User> users = (ArrayList<User>) em.createQuery("SELECT e FROM User e").getResultList();
+    public List<User> getUsers(){
+    	List<User> users = (List<User>) em.createQuery("SELECT e FROM User e").getResultList();
     	return users;
     }
     

@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.persistence.platform.database.DB2MainframePlatform;
 
@@ -23,7 +24,12 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	}
 	
 	private ArrayList<Question> generateQuestions(){
-		ArrayList<Question> questions = dbm.getQuestions();
+		List<Question> questions = dbm.getQuestions();
+		
+		for(Question question: questions){
+			//if()
+		}
+		
 		
 		return null;
 	}

@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Answer;
 import model.Question;
@@ -162,6 +163,10 @@ public class DummyDataCreator {
 	}
 	
 	public static void main(String args[]){
-		generateQuestions();
+		//generateQuestions();
+		List<Question> easyQuestions = dbm.getEasyQuestions();
+		for(Question question : easyQuestions){
+			System.out.println(question.getText());
+		}
 	}
 }
