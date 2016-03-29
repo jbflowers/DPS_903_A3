@@ -376,10 +376,14 @@
         </nav>
 
         <div id="page-wrapper">
- 
+ 			<% 
+ 				int questionNumber = quiz.getCurrentQuestionNumber();
+ 				String questionText = quiz.getCurrentQuestion().getText();
+				String questionType = quiz.getCurrentQuestion().getType();
+ 			%>
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Quiz Question <jsp:getProperty name="quiz" property="currentQuestionNumber"/></h1>
+                    <h1 class="page-header">Quiz Question <%= questionNumber %></h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -389,9 +393,39 @@
             	<div class="col-lg-6">
 					<div class="panel panel-primary">
 		                <div class="panel-heading">
-		                    Ready to go?
+		                    <%= questionText %>
 		                </div>
 		                <div class="panel-body">
+		                    <% if (questionType.equals("text")){
+		                    %>
+		                    
+		                    <div class="form-group">
+                                <label>Text Input with Placeholder</label>
+                                <input class="form-control" placeholder="Enter text">
+                            </div>
+		                    
+		                    <%} if (questionType.equals("radio")){ %>
+		                    <div class="form-group">
+	                            <label>Radio Buttons</label>
+	                            <div class="radio">
+	                                <label>
+	                                    <input name="optionsRadios" id="optionsRadios1" value="option1" checked="" type="radio">Radio 1
+	                                </label>
+	                            </div>
+	                            <div class="radio">
+	                                <label>
+	                                    <input name="optionsRadios" id="optionsRadios2" value="option2" type="radio">Radio 2
+	                                </label>
+	                            </div>
+	                            <div class="radio">
+	                                <label>
+	                                    <input name="optionsRadios" id="optionsRadios3" value="option3" type="radio">Radio 3
+	                                </label>
+	                            </div>
+	                        </div>
+		                    
+		                    <%} %>
+		                    
 		                    <p>
 		
 		                    </p>

@@ -18,6 +18,7 @@ import utils.DBManager;
 public class QuizBean extends QuizBeanBase implements QuizCommonBusiness {
 	
 	public QuizBean() {
+	
     }
 
 }

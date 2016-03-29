@@ -18,6 +18,11 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	public QuizBeanBase(){
 		System.out.println("MADE IT HERE");
 		
+		// If we have a quiz already, exit
+		if (quiz != null){
+			return;
+		}
+		
 		// Initialize db manager and other fields
 		dbm = new DBManager();
 		currentQuestionNumber = 1;
@@ -28,6 +33,8 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		// Make questions
 		List<Question> questions = new ArrayList<Question>();
 
+		System.out.println("Id be interested to know");
+		
 		// Make three easy questions
 		while(questions.size() != 3){
 			Question easyQuestion = dbm.getRandomEasyQuestion();
@@ -50,8 +57,8 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		// Set fields
 		quiz.setQuestions(questions);
 		quiz.setAllowHints(true);
-		quiz.setDescription("TEMP");
-		quiz.setName("TEST");
+		quiz.setDescription("An automated quiz made for you!");
+		quiz.setName("Your quiz");
 		
 		// Store it
 		dbm.commitQuiz(quiz);
