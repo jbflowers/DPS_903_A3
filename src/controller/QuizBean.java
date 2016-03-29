@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 public class QuizBean extends QuizBeanBase implements QuizCommonBusiness {
 	
     public QuizBean() {
+    	
     }
 
 }

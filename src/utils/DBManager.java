@@ -22,7 +22,7 @@ public class DBManager {
     private EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);;
     private EntityManager em = factory.createEntityManager();
     
-    private DBManager(){
+    public DBManager(){
     	em.getTransaction().begin();
     }
     
