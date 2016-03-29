@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import model.Question;
 import model.Quiz;
@@ -73,6 +74,11 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	@Override
 	public Question getCurrentQuestion() {
 		return quiz.getQuestions().get(currentQuestionNumber);
+	}
+	
+	@PreDestroy
+	public void destory(){
+		dbm.close();
 	}
 
 }
