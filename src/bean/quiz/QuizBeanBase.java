@@ -1,4 +1,4 @@
-package controller;
+package bean.quiz;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	protected DBManager dbm;
 	
 	public QuizBeanBase(){
-		System.out.println("MADE IT HERE");
+		System.out.println("MADE IT HERE YAY");
 		
 		// If we have a quiz already, exit
 		if (quiz != null){

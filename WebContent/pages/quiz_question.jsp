@@ -1,5 +1,3 @@
-<jsp:useBean id="quiz" scope="session" class="controller.QuizBean"/>
-<jsp:setProperty name='quiz' property="*"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -375,6 +373,8 @@
             <!-- /.navbar-static-side -->
         </nav>
 
+		<jsp:useBean id="quiz" scope="session" class="bean.quiz.QuizBean"/>
+		<jsp:setProperty name='quiz' property="*"/>
         <div id="page-wrapper">
  			<% 
  				int questionNumber = quiz.getCurrentQuestionNumber();
@@ -396,15 +396,25 @@
 		                    <%= questionText %>
 		                </div>
 		                <div class="panel-body">
-		                    <% if (questionType.equals("text")){
-		                    %>
+		                    <% if (questionType.equals("text")){ %>
 		                    
 		                    <div class="form-group">
                                 <label>Text Input with Placeholder</label>
                                 <input class="form-control" placeholder="Enter text">
                             </div>
 		                    
-		                    <%} if (questionType.equals("radio")){ %>
+		                    <%} 
+		                    if (questionType.equals("number")){ %>
+		                    
+		                    <div class="form-group">
+	                            <label>Text Input</label>
+	                            <input class="form-control" type="number">
+	                            <p class="help-block">Example block-level help text here.</p>
+	                        </div>
+		                    
+		                    <%}
+		                    if (questionType.equals("mc")){ %>
+		                    
 		                    <div class="form-group">
 	                            <label>Radio Buttons</label>
 	                            <div class="radio">
@@ -424,7 +434,44 @@
 	                            </div>
 	                        </div>
 		                    
-		                    <%} %>
+		                    <%} 
+		                    if (questionType.equals("check")){ %> 
+		                    
+                    		<div class="form-group">
+                                <label>Checkboxes</label>
+                                <div class="checkbox">
+                                    <label>
+                                        <input value="" type="checkbox">Checkbox 1
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input value="" type="checkbox">Checkbox 2
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input value="" type="checkbox">Checkbox 3
+                                    </label>
+                                </div>
+                            </div>
+		                    <%}
+		                    
+		                    if(questionType.equals("drop")){ %>
+		                      
+		                    <div class="form-group">
+	                            <label>Selects</label>
+	                            <select class="form-control">
+	                                <option>1</option>
+	                                <option>2</option>
+	                                <option>3</option>
+	                                <option>4</option>
+	                                <option>5</option>
+	                            </select>
+	                        </div>
+		                    
+		                    <%}
+		                    %>
 		                    
 		                    <p>
 		

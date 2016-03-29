@@ -1,4 +1,4 @@
-package controller;
+package bean.quiz;
 
 import model.Question;
 
