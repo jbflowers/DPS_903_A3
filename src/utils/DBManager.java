@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import model.Quiz;
+import model.QuizResponse;
 
 public class DBManager {
     
@@ -29,7 +30,24 @@ public class DBManager {
     	Quiz quiz = (Quiz) em.find(Quiz.class, id);
     	return quiz;
     }
+   
+    /*
+    public int commitQuizResponse(QuizResponse quizResponse){
+    	em.persist(quizResponse);
+    	em.getTransaction().commit();
+    	return quizResponse.getId();
+    }
     
+    public QuizResponse getQuizResponseById(int id){
+    	QuizResponse quizResponse = (QuizResponse) em.find(QuizResponse.class, id);
+    	return quizResponse;
+    }
+    
+    
+    public int commitQuestion(){
+    	
+    }
+    */
     public void close(){
     	em.close();
     }
