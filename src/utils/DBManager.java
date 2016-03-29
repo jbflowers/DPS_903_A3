@@ -26,6 +26,11 @@ public class DBManager {
     	em.getTransaction().begin();
     }
     
+    public ArrayList<Quiz> getQuizzes(){
+    	ArrayList<Quiz> quizzes = (ArrayList<Quiz>) em.createQuery("SELECT e FROM Quiz e").getResultList();
+    	return quizzes;
+    }
+    
     public int commitQuiz(Quiz quiz){
     	em.persist(quiz);
     	em.getTransaction().commit();
@@ -37,6 +42,11 @@ public class DBManager {
     	return quiz;
     }
    
+    public ArrayList<QuizResponse> getQuizResponses(){
+    	ArrayList<QuizResponse> quizResponses = (ArrayList<QuizResponse>) em.createQuery("SELECT e FROM QuizResponse e").getResultList();
+    	return quizResponses;
+    }
+    
     public int commitQuizResponse(QuizResponse quizResponse){
     	em.persist(quizResponse);
     	em.getTransaction().commit();
@@ -46,6 +56,11 @@ public class DBManager {
     public QuizResponse getQuizResponseById(int id){
     	QuizResponse quizResponse = (QuizResponse) em.find(QuizResponse.class, id);
     	return quizResponse;
+    }
+    
+    public ArrayList<Question> getQuestions(){
+    	ArrayList<Question> questions = (ArrayList<Question>) em.createQuery("SELECT e FROM Question e").getResultList();
+    	return questions;
     }
     
     public int commitQuestion(Question question){
@@ -59,6 +74,11 @@ public class DBManager {
     	return question;
     }
     
+    public ArrayList<QuestionResponse> getQuestionResponses(){
+    	ArrayList<QuestionResponse> questionResponses = (ArrayList<QuestionResponse>) em.createQuery("SELECT e FROM QuestionResponse e").getResultList();
+    	return questionResponses;
+    }
+    
     public int commitQuestionResponse(QuestionResponse questionResponse){
     	em.persist(questionResponse);
     	em.getTransaction().commit();
@@ -68,6 +88,11 @@ public class DBManager {
     public QuestionResponse getQuestionResponseById(int id){
     	QuestionResponse questionResponse = (QuestionResponse) em.find(QuestionResponse.class, id);
     	return questionResponse;
+    }
+    
+    public ArrayList<SubQuestion> getSubQuestions(){
+    	ArrayList<SubQuestion> subQuestions = (ArrayList<SubQuestion>) em.createQuery("SELECT e FROM SubQuestion e").getResultList();
+    	return subQuestions;
     }
     
     public int commitSubQuestion(SubQuestion subQuestion){
@@ -81,6 +106,11 @@ public class DBManager {
     	return subQuestion;
     }
     
+    public ArrayList<Answer> getAnswers(){
+    	ArrayList<Answer> answers = (ArrayList<Answer>) em.createQuery("SELECT e FROM Answer e").getResultList();
+    	return answers;
+    }
+    
     public int commitAnswer(Answer answer){
     	em.persist(answer);
     	em.getTransaction().commit();
@@ -92,6 +122,11 @@ public class DBManager {
     	return answer;
     }
     
+    public ArrayList<Message> getMessages(){
+    	ArrayList<Message> messages = (ArrayList<Message>) em.createQuery("SELECT e FROM Message e").getResultList();
+    	return messages;
+    }
+    
     public int commitMessage(Message message){
     	em.persist(message);
     	em.getTransaction().commit();
@@ -101,6 +136,11 @@ public class DBManager {
     public Message getMessageById(int id){
     	Message message = (Message) em.find(Message.class, id);
     	return message;
+    }
+    
+    public ArrayList<User> getUsers(){
+    	ArrayList<User> users = (ArrayList<User>) em.createQuery("SELECT e FROM User e").getResultList();
+    	return users;
     }
     
     public String commitUser(User user){
