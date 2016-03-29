@@ -6,4 +6,5 @@ import model.Answer;
 public interface QuestionCommonBusiness {
     //int getCurrentQuestionNumber();
     //Question getCurrentQuestion();
+
 }

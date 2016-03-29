@@ -8,28 +8,16 @@ import utils.DBManager;
 
 public class QuestionBeanBase implements QuestionCommonBusiness{
     //private int currentQuestionNumber;
-    protected Question question;
+    private Question question;
     protected DBManager dbm;
 
     public QuestionBeanBase(){
         System.out.println("Constructing a question...");
 
-        // If we have a question already, exit
-        if (question != null){
-            return;
-        }
-
-        // Initialize db manager and other fields
         dbm = new DBManager();
-        //currentQuestionNumber = 1;
-
-        // Make your quiz
         question = new Question();
 
-        // Make questions
-        //List<Question> questions = new ArrayList<Question>();
-
-        System.out.println("Id be interested to know");
+        System.out.println("question bean constructor");
 
 
         // Make two unique medium questions

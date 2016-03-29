@@ -1,5 +1,4 @@
 <jsp:useBean id="question" scope="session" class="bean.question.QuestionBean"/>
-<jsp:setProperty name='question' property="*"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -372,6 +371,7 @@
         <!-- /.navbar-static-side -->
     </nav>
 
+    <jsp:setProperty name="question" property="*" />
     <div id="page-wrapper">
 
         <div class="row">
@@ -379,6 +379,9 @@
                 <h1 class="page-header">Create a Quiz Question</h1>
                 <form method="get">
                     <div class="form-group">
+
+                        <label for="text">Question Description</label>
+                        <input type="text" name="text" id="text" placeholder="Enter problem description here...">
                         <label for="type">Type of Question</label>
                         <select name="type" class="form-control" id="type">
                             <option value="check">Checkbox</option>
@@ -391,7 +394,7 @@
 
                     <div class="form-group oneMany manyMany">
                         <label for="numberOfChoices">Number of Possible Choices?</label>
-                        <input type="number" name="numberOfChoices" id="numberOfChoices" class="form-control" placeholder="Enter the number of choices (ie. '5')">
+                        <input type="number" name="numberOfChoices" id="numberOfChoices" class="form-control" placeholder="Enter the number of choices (ie. '5')...">
                     </div>
 
                     <div class="form-group choice" style="display:none">
