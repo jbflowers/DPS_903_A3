@@ -21,7 +21,7 @@ public class QuestionResponse {
     private int questionId;
     
 	// Can be an id pointing to an answer or a text response depending on question type
-    private String questionResponse;
+    private String[] questionResponse;
 
 	public int getId() {
 		return id;
@@ -35,11 +35,11 @@ public class QuestionResponse {
 		this.attempt = attempt;
 	}
 
-    public String getQuestionResponse() {
+    public String[] getQuestionResponse() {
 		return questionResponse;
 	}
 
-	public void setQuestionResponse(String questionResponse) {
+	public void setQuestionResponse(String[] questionResponse) {
 		this.questionResponse = questionResponse;
 	}
 

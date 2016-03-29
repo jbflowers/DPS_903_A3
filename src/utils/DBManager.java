@@ -131,6 +131,7 @@ public class DBManager {
     }
     
     public int commitQuestionResponse(QuestionResponse questionResponse){
+    	em.getTransaction().begin();
     	em.persist(questionResponse);
     	em.getTransaction().commit();
     	return questionResponse.getId();

@@ -64,14 +64,14 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	}
 	
 	@Override
-	public int getCurrentQuestionNumber() {
+	synchronized public int getCurrentQuestionNumber() {
 		return currentQuestionNumber;
 		
 	}
 
 	@Override
-	public Question getCurrentQuestion() {
-		return quiz.getQuestions().get(currentQuestionNumber);
+	synchronized public Question getCurrentQuestion() {
+		return quiz.getQuestions().get(currentQuestionNumber - 1);
 	}
 	
 	@PreDestroy
@@ -80,7 +80,7 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	}
 
 	@Override
-	public void nextQuestion() {
+	synchronized public void nextQuestion() {
 		currentQuestionNumber++;
 	}
 

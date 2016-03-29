@@ -1,5 +1,5 @@
-<jsp:useBean id="quiz" scope="session" class="bean.quiz.QuizBean"/>
-<jsp:useBean id="questionResponse" scope="session" class="bean.questionresponse.QuestionResponseBean"/>
+<jsp:useBean id="quiz" scope="session" class="bean.quiz.QuizBean" scope="session"/>
+<jsp:useBean id="questionResponse" scope="session" class="bean.questionresponse.QuestionResponseBean" scope="session"/>
 
 <!DOCTYPE html>
 <html lang="en">
