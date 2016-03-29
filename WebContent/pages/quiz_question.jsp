@@ -4,6 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<% 
+	if (request.getParameter("questionResponse") != null){
+		response.sendRedirect("process_question_response.jsp");
+	}
+%>
+
+
 <head>
 
     <meta charset="utf-8">
@@ -408,7 +415,7 @@
 		                <div class="panel-heading">
 		                    <%= questionText %>
 		                </div>
-			           	<form method="post">
+			           	<form method="POST">
 			                <div class="panel-body">
 			                    <% if (questionType.equals("text")){ %>
 			                    
@@ -483,9 +490,12 @@
 			                    </p>
 			                </div>
 		                <div class="panel-footer">
-		                    <button type="submit" class="btn btn-default" onclick="window.location.href='process_question_response.jsp'">Submit</button>
+						<button type="submit" class="btn btn-default submit-button">Submit</button>
+						
+						<a href="process_question_response.jsp"> Go to next question </a>
 		                </div>
 		                </form>
+		                
 	                </div>
 	                <!-- /.panel panel-primary -->
 	            </div>
@@ -519,6 +529,12 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+
+	<script>
+	$(document).ready(function() {
+		$(".submit-button").on("click", function(){ console.log("I'm trying to redirect now!"); window.location.replace("process_question_response.jsp"); });
+	});
+	</script>
 
 </body>
 

@@ -1,9 +1,6 @@
+<HTML>
 <jsp:useBean id="quiz" scope="session" class="bean.quiz.QuizBean" scope="session"/>
 <jsp:useBean id="questionResponse" scope="session" class="bean.questionresponse.QuestionResponseBean" scope="session"/>
-
-<!DOCTYPE html>
-<html lang="en">
-
 <% 
 	questionResponse.commitQuestionResponse();
 	if (questionResponse.isCorrect()){
@@ -15,8 +12,7 @@
 		questionResponse.incrementAttempts();
 	}
 	
-	Thread.sleep(1000); // sleep 1 seconds
-	
+	Thread.sleep(5000); // sleep 1 seconds
+	response.sendRedirect("quiz_question.jsp");
 %>
-<meta http-equiv="refresh" content="0; url=quiz_question.jsp" />
-</html>
+</HTML>
