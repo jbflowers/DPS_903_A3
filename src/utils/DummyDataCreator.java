@@ -53,7 +53,7 @@ public class DummyDataCreator {
 		// Make first question
 		Question q1 = new Question();
 		
-		q1.setType("mc");
+		q1.setType("drop");
 		q1.setText("From this list, who is the most important?");
 		q1.setDifficulty("easy");
 		q1.setAttemptsBeforeHint(3);
@@ -99,7 +99,7 @@ public class DummyDataCreator {
 		// Make third question
 		Question q3 = new Question();
 		
-		q3.setType("check");
+		q3.setType("drop");
 		q3.setText("From this list, what is in fact a type of cat and not a flammable material?");
 		q3.setDifficulty("easy");
 		q3.setAttemptsBeforeHint(3);
