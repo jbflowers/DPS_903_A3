@@ -23,7 +23,7 @@ public class DBManager {
     private EntityManager em = factory.createEntityManager();
     
     public DBManager(){
-    	em.getTransaction().begin();
+    	//em.getTransaction().begin();
     }
     
     public ArrayList<Quiz> getQuizzes(){
@@ -32,6 +32,7 @@ public class DBManager {
     }
     
     public int commitQuiz(Quiz quiz){
+    	em.getTransaction().begin();
     	em.persist(quiz);
     	em.getTransaction().commit();
     	return quiz.getId();
@@ -48,6 +49,7 @@ public class DBManager {
     }
     
     public int commitQuizResponse(QuizResponse quizResponse){
+    	em.getTransaction().begin();
     	em.persist(quizResponse);
     	em.getTransaction().commit();
     	return quizResponse.getId();
@@ -64,6 +66,10 @@ public class DBManager {
     }
     
     public int commitQuestion(Question question){
+    	em.getTransaction().begin();
+    	for(Answer answer: question.getAnswers()){
+    		em.persist(answer);
+    	}
     	em.persist(question);
     	em.getTransaction().commit();
     	return question.getId();
@@ -96,6 +102,7 @@ public class DBManager {
     }
     
     public int commitSubQuestion(SubQuestion subQuestion){
+    	em.getTransaction().begin();
     	em.persist(subQuestion);
     	em.getTransaction().commit();
     	return subQuestion.getId();
@@ -112,6 +119,7 @@ public class DBManager {
     }
     
     public int commitAnswer(Answer answer){
+    	em.getTransaction().begin();
     	em.persist(answer);
     	em.getTransaction().commit();
     	return answer.getId();
@@ -128,6 +136,7 @@ public class DBManager {
     }
     
     public int commitMessage(Message message){
+    	em.getTransaction().begin();
     	em.persist(message);
     	em.getTransaction().commit();
     	return message.getId();
@@ -144,6 +153,7 @@ public class DBManager {
     }
     
     public String commitUser(User user){
+    	em.getTransaction().begin();
     	em.persist(user);
     	em.getTransaction().commit();
     	return user.getEmail();

@@ -23,7 +23,7 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	}
 	
 	private ArrayList<Question> generateQuestions(){
-		
+		ArrayList<Question> questions = dbm.getQuestions();
 		
 		return null;
 	}
