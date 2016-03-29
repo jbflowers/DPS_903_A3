@@ -9,4 +9,9 @@ public interface QuestionResponseCommonBusiness {
 	
 	public void setQuestionResponse(String response);
 	public String getQuestionResponse();
+	
+	public boolean isCorrect();
+	
+	public void commitQuestionResponse();
+	public void incrementAttempts();
 }

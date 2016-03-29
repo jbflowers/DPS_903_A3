@@ -79,4 +79,9 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		dbm.close();
 	}
 
+	@Override
+	public void nextQuestion() {
+		currentQuestionNumber++;
+	}
+
 }

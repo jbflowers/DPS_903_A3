@@ -53,7 +53,7 @@ public class DummyDataCreator {
 		// Make first question
 		Question q1 = new Question();
 		
-		q1.setType("radio");
+		q1.setType("mc");
 		q1.setText("From this list, who is the most important?");
 		q1.setDifficulty("easy");
 		q1.setAttemptsBeforeHint(3);
@@ -99,7 +99,7 @@ public class DummyDataCreator {
 		// Make third question
 		Question q3 = new Question();
 		
-		q3.setType("checkbox");
+		q3.setType("check");
 		q3.setText("From this list, what is in fact a type of cat and not a flammable material?");
 		q3.setDifficulty("easy");
 		q3.setAttemptsBeforeHint(3);
@@ -126,7 +126,7 @@ public class DummyDataCreator {
 		// Make fourth question
 		Question q4 = new Question();
 		
-		q4.setType("checkbox");
+		q4.setType("check");
 		q4.setText("From this list, what is tasty?");
 		q4.setDifficulty("medium");
 		q4.setAttemptsBeforeHint(3);
@@ -172,7 +172,7 @@ public class DummyDataCreator {
 		// Make sixth question
 		Question q6 = new Question();
 		
-		q6.setType("radio");
+		q6.setType("mc");
 		q6.setText("Do or do not, there is no ___.");
 		q6.setDifficulty("hard");
 		q6.setAttemptsBeforeHint(3);

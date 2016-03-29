@@ -391,6 +391,7 @@
 					answerTexts[i] =   quiz.getCurrentQuestion().getAnswers().get(i).getText();
 				}
 
+				questionResponse.setQuestionId(quiz.getCurrentQuestion().getId());
 		
  			%>
             <div class="row">
@@ -407,81 +408,84 @@
 		                <div class="panel-heading">
 		                    <%= questionText %>
 		                </div>
-		                <div class="panel-body">
-		                    <% if (questionType.equals("text")){ %>
-		                    
-		                    <div class="form-group">
-                                <label></label>
-                                <input class="form-control" placeholder="Enter text" name="questionResponse">
-                            </div>    
-		                    
-		                    <%} 
-		                    if (questionType.equals("number")){ %>
-		                    
-		                    <div class="form-group">
-	                            <label>Text Input</label>
-	                            <input class="form-control" type="number" name="questionResponse">
-	                            <p class="help-block">Example block-level help text here.</p>
-	                        </div>
-		                    
-		                    <%}
-		                    if (questionType.equals("mc")){ %>
-		                    
-		                    <div class="form-group">
-	                            <label>Radio Buttons</label>
-	                            <div class="radio">
-	                                <%
+			           	<form method="post">
+			                <div class="panel-body">
+			                    <% if (questionType.equals("text")){ %>
+			                    
+			                    <div class="form-group">
+	                                <label></label>
+	                                <input class="form-control" placeholder="Enter text" name="questionResponse">
+	                            </div>    
+			                    
+			                    <%} 
+			                    if (questionType.equals("number")){ %>
+			                    
+			                    <div class="form-group">
+		                            <label>Text Input</label>
+		                            <input class="form-control" type="number" name="questionResponse">
+		                            <p class="help-block">Example block-level help text here.</p>
+		                        </div>
+			                    
+			                    <%}
+			                    if (questionType.equals("mc")){ %>
+			                    
+			                    <div class="form-group">
+		                            <label>Radio Buttons</label>
+		                            <div class="radio">
+		                                <%
+		                                
+		                                for(int i = 0; i < answerIds.length; i++){ %>
+		                                
+		                                <label>
+		                                    <input name="questionResponse" id="<%= answerIds[i] %>" value="<%= answerIds[i] %>" checked="" type="radio"><%= answerTexts[i] %>
+		                                </label>
+		                                <br>
+		                                <%} %>
+		                            </div>
+		                        </div>
+			                    
+			                    <%} 
+			                    if (questionType.equals("check")){ %> 
+			                    
+	                    		<div class="form-group">
 	                                
-	                                for(int i = 0; i < answerIds.length; i++){ %>
-	                                
-	                                <label>
-	                                    <input name="questionResponse" id="<%= answerIds[i] %>" value="<%= answerIds[i] %>" checked="" type="radio"><%= answerTexts[i] %>
-	                                </label>
-	                                
+	                                <label>Checkboxes</label>
+	                                <div class="checkbox">
+	                                <%  for(int i = 0; i < answerIds.length; i++){ %>
+	                                    <label>
+	                                        <input name="questionResponse" value="<%= answerIds[i] %>" type="checkbox"><%= answerTexts[i] %>
+	                                    </label>
+	                                    <br>
 	                                <%} %>
+	                                </div>
 	                            </div>
-	                        </div>
-		                    
-		                    <%} 
-		                    if (questionType.equals("check")){ %> 
-		                    
-                    		<div class="form-group">
-                                
-                                <label>Checkboxes</label>
-                                <div class="checkbox">
-                                <%  for(int i = 0; i < answerIds.length; i++){ %>
-                                    <label>
-                                        <input name="questionResponse" value="<%= answerIds[i] %>" type="checkbox"><%= answerTexts[i] %>
-                                    </label>
-                                <%} %>
-                                </div>
-                            </div>
-                            
-		                    <%}
-		                    
-		                    if(questionType.equals("drop")){ %>
-		                      
-		                    <div class="form-group">
-	                            <label>Selects</label>
-	                            <select class="form-control">
-	                                <option>1</option>
-	                                <option>2</option>
-	                                <option>3</option>
-	                                <option>4</option>
-	                                <option>5</option>
-	                            </select>
-	                        </div>
-		                    
-		                    <%}
-		                    %>
-		                    
-		                    <p>
-		
-		                    </p>
-		                </div>
+	                            
+			                    <%}
+			                    
+			                    if(questionType.equals("drop")){ %>
+			                      
+			                    <div class="form-group">
+		                            <label>Selects</label>
+		                            <select class="form-control">
+		                                <option>1</option>
+		                                <option>2</option>
+		                                <option>3</option>
+		                                <option>4</option>
+		                                <option>5</option>
+		                            </select>
+		                        </div>
+			                    
+			                    <%}
+			                    %>
+			                    
+			                    <p>
+			
+			                    </p>
+			                </div>
 		                <div class="panel-footer">
-		                    <button type="button" class="btn btn-default">Let's do this</button>
+		                    <button type="submit" class="btn btn-default" onclick="window.location.href='process_question_response.jsp'">Submit</button>
 		                </div>
+		                </form>
 	                </div>
 	                <!-- /.panel panel-primary -->
 	            </div>

@@ -5,4 +5,5 @@ import model.Question;
 public interface QuizCommonBusiness {
 	int getCurrentQuestionNumber();
 	Question getCurrentQuestion();
+	void nextQuestion();
 }
