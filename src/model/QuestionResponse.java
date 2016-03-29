@@ -16,9 +16,34 @@ public class QuestionResponse {
     // The value of the primary key will be automatically generated.
     private int id;
 
-    private String type;
+	private String type;
 
     private int attempt;
+    
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getAttempt() {
+		return attempt;
+	}
+
+	public void setAttempt(int attempt) {
+		this.attempt = attempt;
+	}
+
 
     public QuestionResponse(){
         super();

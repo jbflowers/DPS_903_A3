@@ -12,15 +12,55 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     // The value of the primary key will be automatically generated.
     private int id;
-    private String text;
-    private Boolean isCorrect;
+	private String text;
+	private Boolean isCorrect;
 
-    @ManyToOne
+	@ManyToOne
     private Question question;
 
-    @ManyToOne
+	@ManyToOne
     private SubQuestion subQuestion;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+    
+    public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+	
+    public Boolean getIsCorrect() {
+		return isCorrect;
+	}
+
+	public void setIsCorrect(Boolean isCorrect) {
+		this.isCorrect = isCorrect;
+	}
+	
+    public Question getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+	
+    public SubQuestion getSubQuestion() {
+		return subQuestion;
+	}
+
+	public void setSubQuestion(SubQuestion subQuestion) {
+		this.subQuestion = subQuestion;
+	}
+	
     public Answer(){
         super();
     }
