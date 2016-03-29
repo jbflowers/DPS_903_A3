@@ -1,3 +1,6 @@
+<jsp:useBean id="quiz" scope="session" class="bean.quiz.QuizBean"/>
+<jsp:useBean id="questionResponse" scope="session" class="bean.questionresponse.QuestionResponseBean"/>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -373,13 +376,22 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-		<jsp:useBean id="quiz" scope="session" class="bean.quiz.QuizBean"/>
-		<jsp:setProperty name='quiz' property="*"/>
+		<jsp:setProperty name="questionResponse" property="questionResponse" /> 
         <div id="page-wrapper">
  			<% 
  				int questionNumber = quiz.getCurrentQuestionNumber();
  				String questionText = quiz.getCurrentQuestion().getText();
 				String questionType = quiz.getCurrentQuestion().getType();
+				String[] answerIds = new String[quiz.getCurrentQuestion().getAnswers().size()];
+				String[] answerTexts = new String[answerIds.length];
+				
+				// Fill answerIds and answerTexts
+				for(int i = 0; i < quiz.getCurrentQuestion().getAnswers().size(); i++){
+					answerIds[i] =   new Integer(quiz.getCurrentQuestion().getAnswers().get(i).getId()).toString();
+					answerTexts[i] =   quiz.getCurrentQuestion().getAnswers().get(i).getText();
+				}
+
+		
  			%>
             <div class="row">
                 <div class="col-lg-12">
@@ -399,16 +411,16 @@
 		                    <% if (questionType.equals("text")){ %>
 		                    
 		                    <div class="form-group">
-                                <label>Text Input with Placeholder</label>
-                                <input class="form-control" placeholder="Enter text">
-                            </div>
+                                <label></label>
+                                <input class="form-control" placeholder="Enter text" name="questionResponse">
+                            </div>    
 		                    
 		                    <%} 
 		                    if (questionType.equals("number")){ %>
 		                    
 		                    <div class="form-group">
 	                            <label>Text Input</label>
-	                            <input class="form-control" type="number">
+	                            <input class="form-control" type="number" name="questionResponse">
 	                            <p class="help-block">Example block-level help text here.</p>
 	                        </div>
 		                    
@@ -418,19 +430,15 @@
 		                    <div class="form-group">
 	                            <label>Radio Buttons</label>
 	                            <div class="radio">
+	                                <%
+	                                
+	                                for(int i = 0; i < answerIds.length; i++){ %>
+	                                
 	                                <label>
-	                                    <input name="optionsRadios" id="optionsRadios1" value="option1" checked="" type="radio">Radio 1
+	                                    <input name="questionResponse" id="<%= answerIds[i] %>" value="<%= answerIds[i] %>" checked="" type="radio"><%= answerTexts[i] %>
 	                                </label>
-	                            </div>
-	                            <div class="radio">
-	                                <label>
-	                                    <input name="optionsRadios" id="optionsRadios2" value="option2" type="radio">Radio 2
-	                                </label>
-	                            </div>
-	                            <div class="radio">
-	                                <label>
-	                                    <input name="optionsRadios" id="optionsRadios3" value="option3" type="radio">Radio 3
-	                                </label>
+	                                
+	                                <%} %>
 	                            </div>
 	                        </div>
 		                    
@@ -438,23 +446,17 @@
 		                    if (questionType.equals("check")){ %> 
 		                    
                     		<div class="form-group">
+                                
                                 <label>Checkboxes</label>
                                 <div class="checkbox">
+                                <%  for(int i = 0; i < answerIds.length; i++){ %>
                                     <label>
-                                        <input value="" type="checkbox">Checkbox 1
+                                        <input name="questionResponse" value="<%= answerIds[i] %>" type="checkbox"><%= answerTexts[i] %>
                                     </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input value="" type="checkbox">Checkbox 2
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input value="" type="checkbox">Checkbox 3
-                                    </label>
+                                <%} %>
                                 </div>
                             </div>
+                            
 		                    <%}
 		                    
 		                    if(questionType.equals("drop")){ %>

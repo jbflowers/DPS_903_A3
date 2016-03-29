@@ -1,14 +1,7 @@
 package bean.quiz;
 
-import java.util.List;
-
-import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-
-import model.Question;
-import model.Quiz;
-import utils.DBManager;
 
 /**
  * Session Bean implementation class QuizBean

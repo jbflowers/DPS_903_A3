@@ -2,9 +2,7 @@ package bean.quiz;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import model.Question;
