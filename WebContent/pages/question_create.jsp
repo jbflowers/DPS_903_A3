@@ -1,9 +1,46 @@
+<%@ page import="model.Answer" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <jsp:useBean id="question" scope="session" class="bean.question.QuestionBean"/>
 <!DOCTYPE html>
 <html lang="en">
-
+<%!
+    List<Answer> tempAnswers = new ArrayList<Answer>();
+    Answer tempAnswer;
+    int numOfChoices;
+    String[] choices;
+%>
 <%
     if (request.getParameter("text") != null){
+
+        // set answers
+        numOfChoices = Integer.parseInt(request.getParameter("numberOfChoices"));
+
+        System.out.println("trying to set answers...");
+        System.out.println(numOfChoices);
+        choices = request.getParameterValues("choice[]");
+
+        for(int i=0; i < numOfChoices; i++){
+            tempAnswer = new Answer();
+            System.out.println("answer text " + i);
+            System.out.println(choices[i]);
+            System.out.println(request.getParameter("correct"+i));
+            tempAnswer.setText(choices[i]);
+
+            if(request.getParameter("correct"+i).equals("true")){
+                tempAnswer.setIsCorrect(true);
+            } else {
+                tempAnswer.setIsCorrect(false);
+            }
+
+            //tempAnswer.setQuestion(question);
+            tempAnswer.setQuestion(question.getQuestion());
+            //tempAnswer.commitAnswer();
+            tempAnswers.add(tempAnswer);
+        }
+
+        question.setAnswers(tempAnswers);
+
         response.sendRedirect("process_question_create.jsp");
     }
 %>
@@ -404,6 +441,13 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="hint">Hint to Display to Student: </label>
+                        <input type="text" name="hint" id="hint" class="form-control" placeholder="Hint goes here...">
+                        <label for="attemptsBeforeHint">Number of Attempts Before a Hint is Displayed: </label>
+                        <input type="number" name="attemptsBeforeHint" id="attemptsBeforeHint" class="form-control" placeholder="Number of Attempts (ie. '3')...">
+                    </div>
+
                     <div class="form-group oneMany manyMany">
                         <label for="numberOfChoices">Number of Possible Choices?</label>
                         <input type="number" name="numberOfChoices" id="numberOfChoices" class="form-control" placeholder="Enter the number of choices (ie. '5')...">
@@ -412,7 +456,7 @@
 
                     <div class="form-group choice" style="display:none">
                         <label for="choice0">Choice #1: </label>
-                        <input type="text" name="choice" id="choice0" class="form-control">
+                        <input type="text" name="choice[]" id="choice0" class="form-control">
                         <label class="radio-inline">
                             <input type="radio" name="correct0" value="true"> Correct
                         </label>
@@ -478,8 +522,8 @@
                     copy = $($(".choice")[0]).clone(true, true);
                     $(copy.find("label")[0]).attr("for", "choice"+(i)).html("Choice #"+(i+1)+(": "));
                     $(copy.find("input")[0]).attr("id", "choice"+(i));
-                    $(copy.find("input")[1]).attr("name", "choice"+(i));
-                    $(copy.find("input")[2]).attr("name", "choice"+(i));
+                    $(copy.find("input")[1]).attr("name", "correct"+(i));
+                    $(copy.find("input")[2]).attr("name", "correct"+(i));
 
                     button = $($("button")[$("button").length-1]);
 
@@ -500,20 +544,6 @@
 
 
         });
-        /*
-         <div class="form-group choice" style="display:none">
-         <label>Choice # : </label>
-         <input type="text" name="answer">
-         <label class="radio-inline">
-         <input type="radio" name="correct" value="true"> Correct
-         </label>
-         <label class="radio-inline">
-         <input type="radio" name="correct" value="false"> Incorrect
-         </label>
-         </div>
-         */
-
-
     })
 </script>
 
