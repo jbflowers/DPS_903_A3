@@ -16,7 +16,8 @@ public class Quiz {
     private String name;
     private String description;
     private Boolean allowHints;
-    
+    private String status = "in-progress";
+
 	@OneToMany
     private List<Message> messages = new ArrayList<Message>();
 
@@ -82,5 +83,14 @@ public class Quiz {
 		this.quizResponse = quizResponse;
 	}
 
+	// "in-progress", "complete", or "incomplete"
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	public Quiz(){ super(); }
 }

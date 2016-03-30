@@ -61,6 +61,17 @@ public class Answer {
 		this.subQuestion = subQuestion;
 	}
 	
+	public Answer copy(Question question){
+		Answer a = this;
+		Answer b = new Answer();
+		
+		b.setIsCorrect(a.getIsCorrect());
+		b.setQuestion(question);
+		b.setText(a.getText());
+		
+		return b;
+	}
+	
     public Answer(){
         super();
     }
