@@ -272,7 +272,12 @@ public class DBManager {
     	
     	return user;
     }
-    
+
+	public void removeQuestionById(int id){
+		Question question = getQuestionById(id);
+		em.remove(question);
+	}
+
     public void close(){
     	em.close();
     }
