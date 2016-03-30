@@ -5,7 +5,9 @@ import model.Answer;
 import java.util.List;
 
 public interface QuestionCommonBusiness {
-    //int getCurrentQuestionNumber();
+    int getNumberOfChoices();
+    void setNumberOfChoices(String text);
+
     //Question getCurrentQuestion();
     void setText(String text);
     String getText();

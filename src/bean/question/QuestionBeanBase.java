@@ -10,7 +10,7 @@ import utils.DBManager;
 import java.util.List;
 
 public class QuestionBeanBase implements QuestionCommonBusiness{
-    //private int currentQuestionNumber;
+    private int numberOfChoices;
     private Question question;
     protected DBManager dbm;
 
@@ -23,6 +23,16 @@ public class QuestionBeanBase implements QuestionCommonBusiness{
         System.out.println("question bean constructor");
 
         //dbm.commitQuestion(question);
+    }
+
+    @Override
+    public void setNumberOfChoices(String text){
+        numberOfChoices = Integer.parseInt(text);
+    }
+
+    @Override
+    public int getNumberOfChoices(){
+        return numberOfChoices;
     }
 
     @Override
