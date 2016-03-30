@@ -3,7 +3,7 @@
 <jsp:useBean id="questionResponse" scope="session" class="bean.questionresponse.QuestionResponseBean" scope="session"/>
 <% 
 	questionResponse.commitQuestionResponse();
-	
+	//questionResponse.incrementAttempts();
 	if (questionResponse.isCorrect()){
 		quiz.nextQuestion();
 		questionResponse.setLastAttemptWrong(false);

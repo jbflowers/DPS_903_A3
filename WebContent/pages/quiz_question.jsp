@@ -7,15 +7,17 @@
 <% 
 	boolean emptyInput = false;
 	boolean failedAttempt = questionResponse.isLastAttemptWrong();	
-
+	boolean redirect = false;
+	
 	System.out.println("Attempt number: " + questionResponse.getAttempt());
 	System.out.println("questionResponse: " + request.getParameter("questionResponse"));
 	
-	if (questionResponse.getAttempt() > 0 && (request.getParameter("questionResponse") == null || request.getParameter("questionResponse").equals(""))){
+	if (questionResponse.getAttempt() > 0 && (request.getParameter("questionResponse") == null || request.getParameter("questionResponse").length() == 0)){
 		emptyInput = true;
 	}
 	else if (questionResponse.getAttempt() != 0){
 		response.sendRedirect("process_question_response.jsp");
+		redirect = true;
 	}
 	
 	if (questionResponse.isLastAttemptWrong()){
@@ -23,7 +25,8 @@
 		questionResponse.setLastAttemptWrong(false);
 	}
 	
-	questionResponse.incrementAttempts();
+	if (!redirect)
+		questionResponse.incrementAttempts();
 %>
 
 
@@ -434,18 +437,27 @@
 	                </div>
                 </div>
             </div>
-            <%} %>
+            <%} 
+            	System.out.println("Question's attempts before hint: " + quiz.getCurrentQuestion().getAttemptsBeforeHint());
+            %>
             
-         	<% 	if (failedAttempt){ %>
-            <div class="row">
-            	<div class="col-lg-12">
-	            	<div class="alert alert-warning">
-	                	Uh oh, looks like that's not the right answer. Try again!
+         	<% if (failedAttempt && questionResponse.getAttempt() < quiz.getCurrentQuestion().getAttemptsBeforeHint()){ %>
+	            <div class="row">
+	            	<div class="col-lg-12">
+		            	<div class="alert alert-warning">
+		                	Uh oh, looks like that's not the right answer. Try again!
+		                </div>
 	                </div>
-                </div>
-            </div>
+	            </div>
+            <%} else if (questionResponse.getAttempt() >= quiz.getCurrentQuestion().getAttemptsBeforeHint()) { %>
+	            <div class="row">
+	            	<div class="col-lg-12">
+		            	<div class="alert alert-warning">
+		                	Psst! Here's a hint: <%= quiz.getCurrentQuestion().getHint() %>
+		                </div>
+	                </div>
+	            </div>
             <%} %>
-            
             <div class="row">
             	<div class="col-lg-6">
 					<div class="panel panel-primary">
