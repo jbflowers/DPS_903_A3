@@ -122,6 +122,7 @@ public class QuizBeanBase implements QuizCommonBusiness{
 
 	@Override
 	public void completeQuiz() {
+		quiz.setStatus("complete");
 		dbm.commitQuiz(quiz);
 
 		int mark = 0;
