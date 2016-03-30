@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">Quiz Creator</a>
+        <a class="navbar-brand" href="index.jsp">Quiz Creator</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -242,12 +242,27 @@
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quizzes <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <% if (session.getAttribute("role").equals("admin")){ %>
-                        <li> <a href="#">Create Quizz </a> </li>
-                        <li> <a href="question_create.jsp">Questions</a></li>
-                        <li> <a href="#"> All Quizes </a></li>
+                            <li> <a href="#">Create Quizz </a> </li>
+                            <li> <a href="question_create.jsp">Questions</a></li>
+                            <li> <a href="#"> All Quizes </a></li>
                         <% } else { %>
-                        <li><a href="take_quiz.html">Take Quiz</a></li>
-                        <li><a href="#">View My Marks </a></li>
+                            <li><a href="take_quiz.html">Take Quiz</a></li>
+                            <li><a href="#">View My Marks </a></li>
+                        <% } %>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+
+                <li>
+                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quiz Results <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <% if (session.getAttribute("role").equals("admin")){ %>
+                            <li> <a href="#"> View Student Marks </a> </li>
+                            <li> <a href="question_create.jsp"> Result Chart </a></li>
+                            <li> <a href="#"> Metrics </a></li>
+                        <% } else { %>
+                            <li><a href="take_quiz.html">My Marks</a></li>
+                            <li><a href="#"> Statistics </a></li>
                         <% } %>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -307,18 +322,18 @@
                     <%--</ul>--%>
                     <%--<!-- /.nav-second-level -->--%>
                 <%--</li>--%>
-                <li>
-                    <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="blank.html">Blank Page</a>
-                        </li>
-                        <li>
-                            <a href="login.jsp">Login Page</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
+                <%--<li>--%>
+                    <%--<a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>--%>
+                    <%--<ul class="nav nav-second-level">--%>
+                        <%--<li>--%>
+                            <%--<a href="blank.html">Blank Page</a>--%>
+                        <%--</li>--%>
+                        <%--<li>--%>
+                            <%--<a href="login.jsp">Login Page</a>--%>
+                        <%--</li>--%>
+                    <%--</ul>--%>
+                    <%--<!-- /.nav-second-level -->--%>
+                <%--</li>--%>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
