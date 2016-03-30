@@ -1,67 +1,129 @@
 package bean.question;
 
 import javax.annotation.PreDestroy;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
+import model.Answer;
 import model.Question;
 
 import utils.DBManager;
 
-public class QuestionBeanBase implements QuestionCommonBusiness{
-    //private int currentQuestionNumber;
-    protected Question question;
-    protected DBManager dbm;
+import java.util.List;
 
+public class QuestionBeanBase implements QuestionCommonBusiness{
+    private int numberOfChoices;
+    private Question question;
+    protected DBManager dbm;
+	private EntityManager em;
+    
+    
     public QuestionBeanBase(){
         System.out.println("Constructing a question...");
 
-        // If we have a question already, exit
-        if (question != null){
-            return;
-        }
-
-        // Initialize db manager and other fields
         dbm = new DBManager();
-        //currentQuestionNumber = 1;
-
-        // Make your quiz
         question = new Question();
 
-        // Make questions
-        //List<Question> questions = new ArrayList<Question>();
+        System.out.println("question bean constructor");
 
-        System.out.println("Id be interested to know");
-
-
-        // Make two unique medium questions
-//        while(questions.size() != 5){
-//            Question mediumQuestion = dbm.getRandomMediumQuestion();
-//            if (!questions.contains(mediumQuestion)){
-//                questions.add(mediumQuestion);
-//            }
-//        }
-
-        // Make one hard question
-//        questions.add(dbm.getRandomHardQuestion());
-
-        // Set fields
-//        quiz.setQuestions(questions);
-//        quiz.setAllowHints(true);
-//        quiz.setDescription("An automated quiz made for you!");
-//        quiz.setName("Your quiz");
-
-        // Store it
-        dbm.commitQuestion(question);
+        //dbm.commitQuestion(question);
     }
 
-    //@Override
-    //public int getQuestionForm() {
-        //return currentQuestionNumber;
-    //}
+    @Override
+    public Question getQuestionById(int id){
+        return dbm.getQuestionById(id);
+    }
 
-    //@Override
-    //public Question getCurrentQuestion() {
-    //   return quiz.getQuestions().get(currentQuestionNumber);
-    //}
+    @Override
+    public Question getQuestion(){
+        return question;
+    }
+
+    @Override
+    public void setQuestion(Question question){
+        this.question = question;
+    }
+
+    @Override
+    public void populateQuestionById(int id) {
+        question = dbm.getQuestionById(id);
+    }
+
+    @Override
+    public void setNumberOfChoices(String text){
+        numberOfChoices = Integer.parseInt(text);
+    }
+
+    @Override
+    public int getNumberOfChoices(){
+        return numberOfChoices;
+    }
+
+    @Override
+    public void setText(String text){
+        question.setText(text);
+    }
+
+    @Override
+    public String getText(){
+        return question.getText();
+    }
+
+    @Override
+    public void setType(String type){
+        question.setType(type);
+    }
+
+    @Override
+    public String getType(){
+        return question.getType();
+    }
+
+    @Override
+    public void setDifficulty(String difficulty){
+        question.setDifficulty(difficulty);
+    }
+
+    @Override
+    public String getDifficulty(){
+        return question.getDifficulty();
+    }
+
+    @Override
+    public void setHint(String hint){
+        question.setHint(hint);
+    }
+
+    @Override
+    public String getHint(){
+        return question.getHint();
+    }
+
+    @Override
+    public void setAttemptsBeforeHint(int attemptsBeforeHint){
+        question.setAttemptsBeforeHint(attemptsBeforeHint);
+    }
+
+    @Override
+    public int getAttemptsBeforeHint(){
+        return question.getAttemptsBeforeHint();
+    }
+
+    @Override
+    public void setAnswers(List<Answer> answers){
+        question.setAnswers(answers);
+    }
+
+    @Override
+    public List<Answer> getAnswers(){
+        return question.getAnswers();
+    }
+
+    @Override
+    public void commitQuestion(){
+        dbm.commitQuestion(question);
+    }
 
     @PreDestroy
     public void destroy(){

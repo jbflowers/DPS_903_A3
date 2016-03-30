@@ -53,10 +53,10 @@ public class DummyDataCreator {
 		// Make first question
 		Question q1 = new Question();
 		
-		q1.setType("mc");
+		q1.setType("drop");
 		q1.setText("From this list, who is the most important?");
 		q1.setDifficulty("easy");
-		q1.setAttemptsBeforeHint(3);
+		q1.setAttemptsBeforeHint(6);
 		q1.setHint("He has won the most grand slams of the modern era");
 		
 		Answer q1a1 = new Answer();
@@ -83,7 +83,7 @@ public class DummyDataCreator {
 		q2.setType("text");
 		q2.setText("Write out 'Justin' exactly.");
 		q2.setDifficulty("easy");
-		q2.setAttemptsBeforeHint(3);
+		q2.setAttemptsBeforeHint(6);
 		q2.setHint("Dude, it's not even a question.");
 		
 		Answer q2a1 = new Answer();
@@ -99,10 +99,10 @@ public class DummyDataCreator {
 		// Make third question
 		Question q3 = new Question();
 		
-		q3.setType("check");
+		q3.setType("drop");
 		q3.setText("From this list, what is in fact a type of cat and not a flammable material?");
 		q3.setDifficulty("easy");
-		q3.setAttemptsBeforeHint(3);
+		q3.setAttemptsBeforeHint(6);
 		q3.setHint("'Gun poweder' is in fact flammable");
 		
 		Answer q3a1 = new Answer();
@@ -129,7 +129,7 @@ public class DummyDataCreator {
 		q4.setType("check");
 		q4.setText("From this list, what is tasty?");
 		q4.setDifficulty("medium");
-		q4.setAttemptsBeforeHint(3);
+		q4.setAttemptsBeforeHint(6);
 		q4.setHint("Nobody likes sardines");
 		
 		Answer q4a1 = new Answer();
@@ -156,7 +156,7 @@ public class DummyDataCreator {
 		q5.setType("text");
 		q5.setText("What is the most used text editor for Linux?");
 		q5.setDifficulty("medium");
-		q5.setAttemptsBeforeHint(3);
+		q5.setAttemptsBeforeHint(6);
 		q5.setHint("It stands for VIsual iMproved");
 		
 		Answer q5a1 = new Answer();
@@ -175,7 +175,7 @@ public class DummyDataCreator {
 		q6.setType("mc");
 		q6.setText("Do or do not, there is no ___.");
 		q6.setDifficulty("hard");
-		q6.setAttemptsBeforeHint(3);
+		q6.setAttemptsBeforeHint(6);
 		q6.setHint("Attempt?");
 		
 		Answer q6a1 = new Answer();

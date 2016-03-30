@@ -1,5 +1,7 @@
 package bean.questionresponse;
 
+import model.QuizResponse;
+
 public interface QuestionResponseCommonBusiness {
 	public void setAttempt(int attempt);
 	public int getAttempt();
@@ -14,5 +16,13 @@ public interface QuestionResponseCommonBusiness {
 	
 	public void commitQuestionResponse();
 	public void incrementAttempts();
+	
+	public boolean isLastAttemptWrong();
+	public void setLastAttemptWrong(boolean lastAttemptWrong);
+	
+	public void setIsCorrect(boolean isCorrect);
+	public boolean getIsCorrect();
+	
+	public void reset();
 	
 }
