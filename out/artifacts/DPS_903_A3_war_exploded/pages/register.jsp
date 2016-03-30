@@ -46,9 +46,13 @@
                 <div class="panel-body">
                     <form role="form" method="post" action="process_user_register.jsp">
                         <fieldset>
+                            <% if (request.getSession().getAttribute("error") != null) {%>
+                            <p style="color:red;"><%= request.getSession().getAttribute("error")%></p>
+                            <%}%>
                             <div class="form-group">
                                 <input class="form-control" placeholder="Name" name="name" type="name" autofocus>
                             </div>
+
                             <div class="form-group">
                                 <input class="form-control" placeholder="E-mail" name="email" type="email">
                             </div>
@@ -70,8 +74,7 @@
 
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <input type="submit" name="Register" value="register" class="btn btn-lg btn-primary btn-block"></input>
-                            <input type="submit" name="Login" value="login" class="btn btn-lg btn-primary btn-success"></input>
+                            <input type="submit" name="Register" class="btn btn-lg btn-primary btn-block">
 
                         </fieldset>
                     </form>

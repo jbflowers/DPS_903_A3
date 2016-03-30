@@ -10,6 +10,8 @@ public class UserBeanBase implements UserCommonBusiness {
 
     protected User user;
     protected DBManager dbm;
+    protected String message;
+    protected String state;
 
     public UserBeanBase() {
         System.out.println("Constructing a question...");
@@ -18,6 +20,7 @@ public class UserBeanBase implements UserCommonBusiness {
         // Initialize db manager and other fields
         dbm = new DBManager();
         user = new User();
+
 
 //        System.out.println("Id be interested to know");
 //
@@ -39,6 +42,10 @@ public class UserBeanBase implements UserCommonBusiness {
     public boolean commitUser() {
         return null != dbm.commitUser(user);
     }
+
+    public boolean userLogIn(String email, String salt){
+        return dbm.userLogIn(email, salt);
+    }
     @Override
     public void setName(String name){
         user.setName(name);
@@ -50,17 +57,25 @@ public class UserBeanBase implements UserCommonBusiness {
     }
 
     @Override
+    public String getEmail(){ return user.getEmail(); }
+
+    @Override
     public void setPassword(String password){
         user.setPassword(password);
     }
+
     @Override
     public void setRole(String role){
         user.setRole(role);
     }
+
     @Override
-    public String getEmail(){
-        return user.getEmail();
-    }
+    public String getRole() { return user.getRole(); }
+
+    public String getMessage() { return message; }
+
+    public void setMessage(String error) { message = error; }
+
     public boolean isRegistered(String email) {
         return null != dbm.getUserByEmail(email);
     }

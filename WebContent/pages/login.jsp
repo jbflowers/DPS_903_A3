@@ -1,4 +1,5 @@
-
+<jsp:useBean id="user" scope="session" class="bean.user.UserBeanBase"/>
+<jsp:setProperty name='user' property="*"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,6 +46,9 @@
                 <div class="panel-body">
                     <form role="form" method="post" action="process_user_login.jsp">
                         <fieldset>
+                            <% if (request.getSession().getAttribute("error") != null) {%>
+                            <p style="color:red;"><%= request.getSession().getAttribute("error")%></p>
+                            <%}%>
                             <div class="form-group">
                                 <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
                             </div>
@@ -57,8 +61,8 @@
                                 </label>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
-                            <a href="login.jsp" class="btn btn-lg btn-success btn-block">Login</a>
+                            <input type="submit" name="Login" class="btn btn-lg btn-success btn-block">
+                            <a href="register.jsp" class="btn btn-lg btn-primary btn-block"> Or Register</a>
                         </fieldset>
                     </form>
                 </div>

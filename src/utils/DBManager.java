@@ -212,11 +212,13 @@ public class DBManager {
     }
 
 	public boolean userLogIn(String email, String salt){
-		User user = (User) em.createNamedQuery("log in")
+		List<User> users = (List<User>) em.createNamedQuery("log in")
 				.setParameter("pass", salt)
 				.setParameter("email", email)
-				.getSingleResult();
-		return user == null;
+		        .setMaxResults(1)
+				.getResultList();
+		if (users == null || users.isEmpty()) { return false; }
+		return true;
 	}
 
     public void close(){
