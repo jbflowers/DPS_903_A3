@@ -25,6 +25,10 @@ public class QuestionBeanBase implements QuestionCommonBusiness{
         //dbm.commitQuestion(question);
     }
 
+    public Question getQuestion(){
+        return question;
+    }
+
     @Override
     public void setNumberOfChoices(String text){
         numberOfChoices = Integer.parseInt(text);
