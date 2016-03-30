@@ -1,53 +1,25 @@
-<%@ page import="model.Answer" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
-<%@ page import="bean.question.QuestionBean" %>
-<jsp:useBean id="question" scope="session" class="bean.question.QuestionBean"/>
+<%@ page import="model.Question" %>
+<jsp:useBean id="instructor" scope="session" class="bean.instructor.InstructorBean"/>
 <!DOCTYPE html>
 <html lang="en">
 <%!
+    /*
     // temporary variables
     List<Answer> tempAnswers = new ArrayList<Answer>();
     Answer tempAnswer;
     int numOfChoices;
     String[] choices;
+    */
 %>
 <%
-    if (request.getParameter("text") != null && request.getParameter("edit") == null) {
 
-        // set possible choices / answers to this question
-        numOfChoices = Integer.parseInt(request.getParameter("numberOfChoices"));
-
-        choices = request.getParameterValues("choice[]");
-
-        for (int i = 0; i < numOfChoices; i++) {
-            tempAnswer = new Answer();
-            tempAnswer.setText(choices[i]);
-
-            if (request.getParameter("correct" + i).equals("true")) {
-                tempAnswer.setIsCorrect(true);
-            } else {
-                tempAnswer.setIsCorrect(false);
-            }
-
-            tempAnswer.setQuestion(question.getQuestion());
-            tempAnswers.add(tempAnswer);
-        }
-
-        question.setAnswers(tempAnswers);
+    if (request.getParameter("remove") != null && request.getParameter("remove").equals("true")){
+        System.out.println("attempting to remove id: " + request.getParameter("id"));
+        instructor.removeQuestionById(Integer.parseInt(request.getParameter("id")));
 
         // finally redirect to save the question
-        response.sendRedirect("process_question_create.jsp");
-
+        response.sendRedirect("instructor_table.jsp");
     }
-
-    if (request.getParameter("edit") != null && request.getParameter("edit").equals("true")){
-        System.out.println("trying to edit the page");
-        question.setQuestion(question.getQuestionById(Integer.parseInt(request.getParameter("id"))));
-    } else {
-        question = new QuestionBean();
-    }
-
 %>
 
 <head>
@@ -419,61 +391,40 @@
         <!-- /.navbar-static-side -->
     </nav>
 
-    <jsp:setProperty name="question" property="*" />
-    <%! String [] levelsOfDifficulty = new String[3];
-        String [] typesOfQuestion = new String[5];
-    %>
+    <jsp:setProperty name="instructor" property="*" />
+    <%! int counter=0; %>
     <div id="page-wrapper">
 
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Create a Quiz Question</h1>
-                <form method="POST">
-                    <div class="form-group">
-
-                        <label for="text">Question Description</label>
-                        <input type="text" name="text" id="text" placeholder="Enter problem description here..." class="form-control" value="<%=question.getText()%>>
-                        <label for="type">Type of Question</label>
-                        <select name="type" class="form-control" id="type">
-                            <option value="check">Checkbox</option>
-                            <option value="drop">Dropdown</option>
-                            <option value="mc">Multiple Choice</option>
-                            <option value="number">Numeric Input</option>
-                            <option value="text">Text Input</option>
-                        </select>
-                        <label for="difficulty">Difficulty of Question</label>
-                        <select name="difficulty" class="form-control" id="difficulty">
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Difficult</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="hint">Hint to Display to Student: </label>
-                        <input type="text" name="hint" id="hint" class="form-control" placeholder="Hint goes here..." value="<%=question.getHint()%>">
-                        <label for="attemptsBeforeHint">Number of Attempts Before a Hint is Displayed: </label>
-                        <input type="number" name="attemptsBeforeHint" id="attemptsBeforeHint" class="form-control" placeholder="Number of Attempts (ie. '3')..." value="<%=question.getAttemptsBeforeHint()%>">
-                    </div>
-
-                    <div class="form-group oneMany manyMany">
-                        <label for="numberOfChoices">Number of Possible Choices?</label>
-                        <input type="number" name="numberOfChoices" id="numberOfChoices" class="form-control" placeholder="Enter the number of choices (ie. '5')..." value="<%=question.getAnswers().size()%>">
-                    </div>
-
-
-                    <div class="form-group choice" style="display:none">
-                        <label for="choice0">Choice #1: </label>
-                        <input type="text" name="choice[]" id="choice0" class="form-control">
-                        <label class="radio-inline">
-                            <input type="radio" name="correct0" value="true"> Correct
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="correct0" value="false"> Incorrect
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-default">Create New Quiz Question</button>
-                </form>
+                <h1 class="page-header">List of Quiz Questions</h1>
+                <table class="table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Quiz Description</th>
+                            <th>Type</th>
+                            <th>Difficulty</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(Question question : instructor.getAllQuestions()){
+                            counter++;
+                        %>
+                        <tr>
+                            <td><%=counter%></td>
+                            <td><%=question.getText()%></td>
+                            <td><%=question.getType()%></td>
+                            <td><%=question.getDifficulty()%></td>
+                            <td>
+                                <a href="question_create.jsp?id=<%=question.getId()%>&edit=true">Edit</a>
+                                <a href="instructor_table.jsp?id=<%=question.getId()%>&remove=true">Delete</a>
+                            </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
                 <%--<jsp:getProperty name="quiz" property="currentQuestion"/>--%>
             </div>
             <!-- /.col-lg-12 -->
@@ -503,6 +454,7 @@
 
 <!-- Custom Form Code -->
 <script>
+    /*
     $(function() {
         $('#type').change(function(){
             switch( $(this).val()){
@@ -553,6 +505,7 @@
 
         });
     })
+    */
 </script>
 
 </body>

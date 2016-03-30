@@ -25,8 +25,24 @@ public class QuestionBeanBase implements QuestionCommonBusiness{
         //dbm.commitQuestion(question);
     }
 
+    @Override
+    public Question getQuestionById(int id){
+        return dbm.getQuestionById(id);
+    }
+
+    @Override
     public Question getQuestion(){
         return question;
+    }
+
+    @Override
+    public void setQuestion(Question question){
+        this.question = question;
+    }
+
+    @Override
+    public void populateQuestionById(int id) {
+        question = dbm.getQuestionById(id);
     }
 
     @Override

@@ -209,7 +209,12 @@ public class DBManager {
     	User user = (User) em.find(User.class, id);
     	return user;
     }
-    
+
+	public void removeQuestionById(int id){
+		Question question = getQuestionById(id);
+		em.remove(question);
+	}
+
     public void close(){
     	em.close();
     }

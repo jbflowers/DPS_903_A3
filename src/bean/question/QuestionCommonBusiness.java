@@ -5,10 +5,17 @@ import model.Answer;
 import java.util.List;
 
 public interface QuestionCommonBusiness {
+
+    void populateQuestionById(int id);
+
     int getNumberOfChoices();
     void setNumberOfChoices(String text);
 
-    //Question getCurrentQuestion();
+    Question getQuestionById(int id);
+
+    Question getQuestion();
+    void setQuestion(Question question);
+
     void setText(String text);
     String getText();
 
