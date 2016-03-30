@@ -12,11 +12,11 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://zenit.senecac.on.ca/dps904_161a10"/>
+                      value="jdbc:mysql://zenit.senecac.on.ca/dps904_161a18"/>
             <property name="javax.persistence.jdbc.user"
-                      value="dps904_161a10"/>
+                      value="dps904_161a18"/>
             <property name="javax.persistence.jdbc.password"
-                      value="bnWW5663"/>
+                      value="mdHJ8829"/>
             <property name="javax.persistence.jdbc.driver"
                       value="com.mysql.jdbc.Driver"/>
             <property name="eclipselink.logging.level"

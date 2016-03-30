@@ -1,11 +1,11 @@
 package utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Answer;
 import model.Question;
 import model.Quiz;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DummyDataCreator {
 	private static DBManager dbm = new DBManager();
