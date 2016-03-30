@@ -6,7 +6,8 @@
 
 <% 
 	boolean emptyInput = false;
-	
+	boolean failedAttempt = questionResponse.isLastAttemptWrong();	
+
 	System.out.println("Attempt number: " + questionResponse.getAttempt());
 	System.out.println("questionResponse: " + request.getParameter("questionResponse"));
 	
@@ -435,6 +436,15 @@
             </div>
             <%} %>
             
+         	<% 	if (failedAttempt){ %>
+            <div class="row">
+            	<div class="col-lg-12">
+	            	<div class="alert alert-warning">
+	                	Uh oh, looks like that's not the right answer. Try again!
+	                </div>
+                </div>
+            </div>
+            <%} %>
             
             <div class="row">
             	<div class="col-lg-6">
