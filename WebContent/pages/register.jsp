@@ -74,7 +74,7 @@
 
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <input type="submit" name="Register" class="btn btn-lg btn-primary btn-block">
+                            <input type="submit" name="Register" value="Register" class="btn btn-lg btn-primary btn-block">
 
                         </fieldset>
                     </form>

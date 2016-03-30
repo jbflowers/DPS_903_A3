@@ -22,7 +22,7 @@
             if (user.commitUser() == true) {
                 session.setAttribute("userid", user.getEmail());
                 session.setAttribute("role", request.getParameter("role"));
-                if (user.getRole().equals("admin")) {
+                if (user.getRole(email).equals("admin")) {
                     response.sendRedirect("question_create.jsp");
                 } else response.sendRedirect("take_quiz.html");
             } else response.sendRedirect("register.jsp");

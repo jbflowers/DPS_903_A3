@@ -46,8 +46,8 @@
                 <div class="panel-body">
                     <form role="form" method="post" action="process_user_login.jsp">
                         <fieldset>
-                            <% if (request.getSession().getAttribute("error") != null) {%>
-                            <p style="color:red;"><%= request.getSession().getAttribute("error")%></p>
+                            <% if (request.getSession().getAttribute("loginerror") != null) {%>
+                            <p style="color:red;"><%= request.getSession().getAttribute("loginerror")%></p>
                             <%}%>
                             <div class="form-group">
                                 <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
@@ -61,7 +61,7 @@
                                 </label>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <input type="submit" name="Login" class="btn btn-lg btn-success btn-block">
+                            <input type="submit" name="Login" value= "Log In" class="btn btn-lg btn-success btn-block">
                             <a href="register.jsp" class="btn btn-lg btn-primary btn-block"> Or Register</a>
                         </fieldset>
                     </form>

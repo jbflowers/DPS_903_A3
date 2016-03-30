@@ -6,7 +6,7 @@
 
     // Empty field check
     if (email == null || salt == null || email.isEmpty() || salt.isEmpty()) {
-        session.setAttribute("error", "Empty fields");
+        session.setAttribute("loginerror", "Empty fields");
         response.sendRedirect("login.jsp");
     }
     else {
@@ -16,7 +16,7 @@
 
             session.setAttribute("userid", email);
             session.setAttribute("role", user.getRole(email));
-            session.setAttribute("error", null);
+            session.setAttribute("loginerror", null);
 
             // Set session and redirect to pages
             if (user.getRole(email).equals("admin")) {
@@ -24,7 +24,7 @@
             } else response.sendRedirect("take_quiz.html");
 
         }  else {
-            session.setAttribute("error", "Invalid credentials");
+            session.setAttribute("loginerror", "Invalid credentials");
             response.sendRedirect("login.jsp");
         }
     }
