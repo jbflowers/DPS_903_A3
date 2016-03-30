@@ -1,13 +1,53 @@
 <jsp:useBean id="quiz" scope="session" class="bean.quiz.QuizBean" scope="session"/>
 <jsp:useBean id="questionResponse" scope="session" class="bean.questionresponse.QuestionResponseBean" scope="session"/>
 
+<%
+// Check if user is logged in
+
+boolean loggedIn = request.getSession().getAttribute("userid") != null;
+
+if (loggedIn){
+	String userId = (String) request.getSession().getAttribute("userid");
+	quiz.setUser(userId);
+}
+else{
+	// Redirect
+	response.sendRedirect("login.jsp");
+}
+
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <% 
-	if (request.getParameter("questionResponse") != null){
-		response.sendRedirect("process_question_response.jsp");
+	boolean emptyInput = false;
+	boolean failedAttempt = questionResponse.isLastAttemptWrong();	
+	boolean redirect = false;
+	
+	System.out.println("Attempt number: " + questionResponse.getAttempt());
+	System.out.println("questionResponse: " + request.getParameter("questionResponse"));
+	
+	if (quiz.getCurrentQuestionNumber() == 7){
+		response.sendRedirect("quiz_results.jsp");
 	}
+	
+	if (questionResponse.getAttempt() > 0 && (request.getParameter("questionResponse") == null || request.getParameter("questionResponse").length() == 0)){
+		emptyInput = true;
+	}
+	else if (questionResponse.getAttempt() != 0){
+		response.sendRedirect("process_question_response.jsp");
+		redirect = true;
+	}
+	
+	if (questionResponse.isLastAttemptWrong()){
+		emptyInput = false;
+		questionResponse.setLastAttemptWrong(false);
+	}
+	
+	if (!redirect)
+		questionResponse.incrementAttempts();
 %>
 
 
@@ -409,6 +449,36 @@
             </div>
             <!-- /.row -->
             
+            <% 	System.out.println("emptyInput is : " + emptyInput);
+            	if (emptyInput){ %>
+            <div class="row">
+            	<div class="col-lg-12">
+	            	<div class="alert alert-danger">
+	                	You cannot submit an empty answer!
+	                </div>
+                </div>
+            </div>
+            <%} 
+            	System.out.println("Question's attempts before hint: " + quiz.getCurrentQuestion().getAttemptsBeforeHint());
+            %>
+            
+         	<% if (failedAttempt && questionResponse.getAttempt() < quiz.getCurrentQuestion().getAttemptsBeforeHint()){ %>
+	            <div class="row">
+	            	<div class="col-lg-12">
+		            	<div class="alert alert-warning">
+		                	Uh oh, looks like that's not the right answer. Try again!
+		                </div>
+	                </div>
+	            </div>
+            <%} else if (questionResponse.getAttempt() >= quiz.getCurrentQuestion().getAttemptsBeforeHint()) { %>
+	            <div class="row">
+	            	<div class="col-lg-12">
+		            	<div class="alert alert-warning">
+		                	Psst! Here's a hint: <%= quiz.getCurrentQuestion().getHint() %>
+		                </div>
+	                </div>
+	            </div>
+            <%} %>
             <div class="row">
             	<div class="col-lg-6">
 					<div class="panel panel-primary">
@@ -473,12 +543,10 @@
 			                      
 			                    <div class="form-group">
 		                            <label>Selects</label>
-		                            <select class="form-control">
-		                                <option>1</option>
-		                                <option>2</option>
-		                                <option>3</option>
-		                                <option>4</option>
-		                                <option>5</option>
+		                            <select class="form-control" name="questionResponse">
+		                            	<% for(int i = 0; i < answerIds.length; i++){ %>
+			                            	<option value="<%= answerIds[i] %>"><%= answerTexts[i] %></option>
+			                           	<%} %>
 		                            </select>
 		                        </div>
 			                    
@@ -489,11 +557,9 @@
 			
 			                    </p>
 			                </div>
-		                <div class="panel-footer">
-						<button type="submit" class="btn btn-default submit-button">Submit</button>
-						
-						<a href="process_question_response.jsp"> Go to next question </a>
-		                </div>
+			                <div class="panel-footer">
+								<button type="submit" class="btn btn-default submit-button">Submit</button>
+			                </div>
 		                </form>
 		                
 	                </div>
@@ -529,12 +595,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
-
-	<script>
-	$(document).ready(function() {
-		$(".submit-button").on("click", function(){ console.log("I'm trying to redirect now!"); window.location.replace("process_question_response.jsp"); });
-	});
-	</script>
 
 </body>
 

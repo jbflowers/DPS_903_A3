@@ -300,6 +300,16 @@ public class DBManager {
 		return true;
 	}
 
+	public void removeQuestionById(int id){
+		Question question = getQuestionById(id);
+
+		em.getTransaction().begin();
+
+		em.remove(question);
+
+		em.getTransaction().commit();
+	}
+
     public void close(){
     	em.close();
     }
