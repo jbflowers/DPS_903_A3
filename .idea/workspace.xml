@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6fb27941-02b6-4516-bf36-9e37b51ec7ee" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/anna.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/WEB-INF/classes/bean/user/UserBeanBase.class" afterPath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/WEB-INF/classes/bean/user/UserBeanBase.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/WEB-INF/classes/bean/user/UserCommonBusiness.class" afterPath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/WEB-INF/classes/bean/user/UserCommonBusiness.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/WEB-INF/classes/utils/DBManager.class" afterPath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/WEB-INF/classes/utils/DBManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DPS_903_A3/bean/user/UserBeanBase.class" afterPath="$PROJECT_DIR$/out/production/DPS_903_A3/bean/user/UserBeanBase.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DPS_903_A3/bean/user/UserCommonBusiness.class" afterPath="$PROJECT_DIR$/out/production/DPS_903_A3/bean/user/UserCommonBusiness.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/DPS_903_A3/utils/DBManager.class" afterPath="$PROJECT_DIR$/out/production/DPS_903_A3/utils/DBManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/pages/login.jsp" afterPath="$PROJECT_DIR$/WebContent/pages/login.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/pages/process_user_login.jsp" afterPath="$PROJECT_DIR$/WebContent/pages/process_user_login.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/pages/process_user_register.jsp" afterPath="$PROJECT_DIR$/WebContent/pages/process_user_register.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/pages/register.jsp" afterPath="$PROJECT_DIR$/WebContent/pages/register.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/pages/login.jsp" afterPath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/pages/login.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/pages/process_user_login.jsp" afterPath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/pages/process_user_login.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/pages/process_user_register.jsp" afterPath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/pages/process_user_register.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/pages/register.jsp" afterPath="$PROJECT_DIR$/out/artifacts/DPS_903_A3_war_exploded/pages/register.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bean/user/UserBeanBase.java" afterPath="$PROJECT_DIR$/src/bean/user/UserBeanBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bean/user/UserCommonBusiness.java" afterPath="$PROJECT_DIR$/src/bean/user/UserCommonBusiness.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/DBManager.java" afterPath="$PROJECT_DIR$/src/utils/DBManager.java" />
-    </list>
+    <list default="true" id="6fb27941-02b6-4516-bf36-9e37b51ec7ee" name="Default" comment="" />
     <ignored path="DPS_903_A3.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -73,10 +53,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SubQuestion.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SubQuestion.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/SubQuestion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.30690536">
               <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               <folding />
             </state>
@@ -88,16 +68,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-6.875">
               <caret line="49" column="42" selection-start-line="48" selection-start-column="28" selection-end-line="50" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="question_create.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WebContent/pages/question_create.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.625">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -135,14 +105,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DBManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DBManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/utils/DBManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0027472528">
-              <caret line="220" column="20" selection-start-line="220" selection-start-column="20" selection-end-line="220" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="246" column="8" selection-start-line="246" selection-start-column="8" selection-end-line="246" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DummyDataCreator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/DummyDataCreator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1043,22 +1023,25 @@
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="6fb27941-02b6-4516-bf36-9e37b51ec7ee" name="Default" comment="" />
       <created>1459297975419</created>
       <option name="number" value="Default" />
       <updated>1459297975419</updated>
-      <workItem from="1459297976579" duration="28578000" />
+      <workItem from="1459297976579" duration="28776000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28578000" />
+    <option name="totallyTimeSpent" value="28776000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="30" y="26" width="1400" height="796" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -1077,10 +1060,10 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42365888" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42365888" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1091,6 +1074,14 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -1260,14 +1251,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/DummyDataCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/pages/forms.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-42.791668">
@@ -1358,14 +1341,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/SubQuestion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WebContent/pages/login.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-25.291666">
@@ -1394,11 +1369,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/DBManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0027472528">
-          <caret line="220" column="20" selection-start-line="220" selection-start-column="20" selection-end-line="220" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="246" column="8" selection-start-line="246" selection-start-column="8" selection-end-line="246" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/DummyDataCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/SubQuestion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30690536">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
