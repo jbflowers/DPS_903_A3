@@ -5,9 +5,24 @@
 <html lang="en">
 
 <% 
-	if (request.getParameter("questionResponse") != null){
+	boolean emptyInput = false;
+	
+	System.out.println("Attempt number: " + questionResponse.getAttempt());
+	System.out.println("questionResponse: " + request.getParameter("questionResponse"));
+	
+	if (questionResponse.getAttempt() > 0 && (request.getParameter("questionResponse") == null || request.getParameter("questionResponse").equals(""))){
+		emptyInput = true;
+	}
+	else if (questionResponse.getAttempt() != 0){
 		response.sendRedirect("process_question_response.jsp");
 	}
+	
+	if (questionResponse.isLastAttemptWrong()){
+		emptyInput = false;
+		questionResponse.setLastAttemptWrong(false);
+	}
+	
+	questionResponse.incrementAttempts();
 %>
 
 
@@ -408,6 +423,18 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            
+            <% 	System.out.println("emptyInput is : " + emptyInput);
+            	if (emptyInput){ %>
+            <div class="row">
+            	<div class="col-lg-12">
+	            	<div class="alert alert-danger">
+	                	You cannot submit an empty answer!
+	                </div>
+                </div>
+            </div>
+            <%} %>
+            
             
             <div class="row">
             	<div class="col-lg-6">

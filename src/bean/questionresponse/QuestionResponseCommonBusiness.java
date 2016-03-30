@@ -15,4 +15,9 @@ public interface QuestionResponseCommonBusiness {
 	public void commitQuestionResponse();
 	public void incrementAttempts();
 	
+	public boolean isLastAttemptWrong();
+	public void setLastAttemptWrong(boolean lastAttemptWrong);
+	
+	public void reset();
+	
 }

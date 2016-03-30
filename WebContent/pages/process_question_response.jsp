@@ -3,16 +3,18 @@
 <jsp:useBean id="questionResponse" scope="session" class="bean.questionresponse.QuestionResponseBean" scope="session"/>
 <% 
 	questionResponse.commitQuestionResponse();
+	
 	if (questionResponse.isCorrect()){
 		quiz.nextQuestion();
+		questionResponse.setLastAttemptWrong(false);
 		System.out.println("Is correct!");
+		questionResponse.reset();
 	}
 	else{
 		System.out.println("Is not correct!");
-		questionResponse.incrementAttempts();
+		questionResponse.setLastAttemptWrong(true);
 	}
 	
-	//Thread.sleep(5000); // sleep 1 seconds
 	response.sendRedirect("quiz_question.jsp");
 %>
 </HTML>
