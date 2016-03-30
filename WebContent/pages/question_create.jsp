@@ -2,6 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<%
+    if (request.getParameter("text") != null){
+        response.sendRedirect("process_question_create.jsp");
+    }
+%>
+
 <head>
 
     <meta charset="utf-8">
@@ -377,11 +383,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Create a Quiz Question</h1>
-                <form method="get">
+                <form method="POST">
                     <div class="form-group">
 
                         <label for="text">Question Description</label>
-                        <input type="text" name="text" id="text" placeholder="Enter problem description here...">
+                        <input type="text" name="text" id="text" placeholder="Enter problem description here..." class="form-control">
                         <label for="type">Type of Question</label>
                         <select name="type" class="form-control" id="type">
                             <option value="check">Checkbox</option>
@@ -390,6 +396,12 @@
                             <option value="number">Numeric Input</option>
                             <option value="text">Text Input</option>
                         </select>
+                        <label for="difficulty">Difficulty of Question</label>
+                        <select name="difficulty" class="form-control" id="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Difficult</option>
+                        </select>
                     </div>
 
                     <div class="form-group oneMany manyMany">
@@ -397,9 +409,10 @@
                         <input type="number" name="numberOfChoices" id="numberOfChoices" class="form-control" placeholder="Enter the number of choices (ie. '5')...">
                     </div>
 
+
                     <div class="form-group choice" style="display:none">
                         <label for="choice0">Choice #1: </label>
-                        <input type="text" name="choice" id="choice0">
+                        <input type="text" name="choice" id="choice0" class="form-control">
                         <label class="radio-inline">
                             <input type="radio" name="correct0" value="true"> Correct
                         </label>
@@ -407,7 +420,7 @@
                             <input type="radio" name="correct0" value="false"> Incorrect
                         </label>
                     </div>
-                    <button type="submit">Create New Quiz Question</button>
+                    <button type="submit" class="btn btn-default">Create New Quiz Question</button>
                 </form>
                 <%--<jsp:getProperty name="quiz" property="currentQuestion"/>--%>
             </div>
@@ -458,7 +471,7 @@
 
         $('#numberOfChoices').on("keyup", function(){
             console.log("key up event here");
-            var number = parseInt($(this).val()), i=0, choices = $(".choice").length, copy;
+            var number = parseInt($(this).val()), i=0, choices = $(".choice").length, copy, button;
 
             if(choices < number){
                 for(i=choices; i<number; i++){
@@ -468,7 +481,9 @@
                     $(copy.find("input")[1]).attr("name", "choice"+(i));
                     $(copy.find("input")[2]).attr("name", "choice"+(i));
 
-                    copy.appendTo("form");
+                    button = $($("button")[$("button").length-1]);
+
+                    copy.insertBefore(button);
                 }
             } else {
                 for(i=choices; i>number-1; i--){
