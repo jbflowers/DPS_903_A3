@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.NoResultException;
 
 import model.Answer;
 import model.Question;
@@ -205,11 +206,19 @@ public class DBManager {
     	return user.getEmail();
     }
     
-    public User getUserById(int id){
-    	User user = (User) em.find(User.class, id);
+    public User getUserByEmail(String email){
+    	User user = (User) em.find(User.class, email);
     	return user;
     }
-    
+
+	public boolean userLogIn(String email, String salt){
+		User user = (User) em.createNamedQuery("log in")
+				.setParameter("pass", salt)
+				.setParameter("email", email)
+				.getSingleResult();
+		return user == null;
+	}
+
     public void close(){
     	em.close();
     }
