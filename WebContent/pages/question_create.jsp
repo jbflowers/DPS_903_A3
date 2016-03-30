@@ -420,9 +420,6 @@
     </nav>
 
     <jsp:setProperty name="question" property="*" />
-    <%! String [] levelsOfDifficulty = new String[3];
-        String [] typesOfQuestion = new String[5];
-    %>
     <div id="page-wrapper">
 
         <div class="row">
@@ -432,26 +429,26 @@
                     <div class="form-group">
 
                         <label for="text">Question Description</label>
-                        <input type="text" name="text" id="text" placeholder="Enter problem description here..." class="form-control" value="<%=question.getText()%>>
+                        <input type="text" name="text" id="text" placeholder="Enter problem description here..." class="form-control" value="<%=question.getText()!=null?question.getText():""%>">
                         <label for="type">Type of Question</label>
                         <select name="type" class="form-control" id="type">
-                            <option value="check">Checkbox</option>
-                            <option value="drop">Dropdown</option>
-                            <option value="mc">Multiple Choice</option>
-                            <option value="number">Numeric Input</option>
-                            <option value="text">Text Input</option>
+                            <option value="check" <%=(question.getType()!=null&&question.getType().equals("check"))?"selected":""%>>Checkbox</option>
+                            <option value="drop" <%=(question.getType()!=null&&question.getType().equals("drop"))?"selected":""%>>Dropdown</option>
+                            <option value="mc" <%=(question.getType()!=null&&question.getType().equals("mc"))?"selected":""%>>Multiple Choice</option>
+                            <option value="number" <%=(question.getType()!=null&&question.getType().equals("number"))?"selected":""%>>Numeric Input</option>
+                            <option value="text" <%=(question.getType()!=null&&question.getType().equals("text"))?"selected":""%>>Text Input</option>
                         </select>
                         <label for="difficulty">Difficulty of Question</label>
                         <select name="difficulty" class="form-control" id="difficulty">
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Difficult</option>
+                            <option value="easy" <%=(question.getDifficulty()!=null&&question.getDifficulty().equals("easy"))?"selected":""%>>Easy</option>
+                            <option value="medium" <%=(question.getDifficulty()!=null&&question.getDifficulty().equals("medium"))?"selected":""%>>Medium</option>
+                            <option value="hard" <%=(question.getDifficulty()!=null&&question.getDifficulty().equals("hard"))?"selected":""%>>Difficult</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="hint">Hint to Display to Student: </label>
-                        <input type="text" name="hint" id="hint" class="form-control" placeholder="Hint goes here..." value="<%=question.getHint()%>">
+                        <input type="text" name="hint" id="hint" class="form-control" placeholder="Hint goes here..." value="<%=question.getHint()!=null?question.getHint():""%>">
                         <label for="attemptsBeforeHint">Number of Attempts Before a Hint is Displayed: </label>
                         <input type="number" name="attemptsBeforeHint" id="attemptsBeforeHint" class="form-control" placeholder="Number of Attempts (ie. '3')..." value="<%=question.getAttemptsBeforeHint()%>">
                     </div>
@@ -504,24 +501,8 @@
 <!-- Custom Form Code -->
 <script>
     $(function() {
-        $('#type').change(function(){
-            switch( $(this).val()){
-                case "mc" || "drop":
-                    console.log("mc or dropdown");
-                    break;
-                case "number" || "text":
-                    console.log("num or txt");
-                    break;
-                case "check":
-                    console.log("checkbox");
-                    break;
-                default:
-                    console.log("default nada");
-            }
 
-        });
-
-        $('#numberOfChoices').on("keyup", function(){
+        function checkChoiceNumber(){
             console.log("key up event here");
             var number = parseInt($(this).val()), i=0, choices = $(".choice").length, copy, button;
 
@@ -549,9 +530,29 @@
             } else {
                 $(".choice").hide();
             }
+        }
 
+
+        $('#type').change(function(){
+            switch( $(this).val()){
+                case "mc" || "drop":
+                    console.log("mc or dropdown");
+                    break;
+                case "number" || "text":
+                    console.log("num or txt");
+                    break;
+                case "check":
+                    console.log("checkbox");
+                    break;
+                default:
+                    console.log("default nada");
+            }
 
         });
+
+        checkChoiceNumber();
+
+        $('#numberOfChoices').on("keyup change", checkChoiceNumber);
     })
 </script>
 
