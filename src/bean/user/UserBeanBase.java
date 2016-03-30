@@ -70,7 +70,7 @@ public class UserBeanBase implements UserCommonBusiness {
     }
 
     @Override
-    public String getRole() { return user.getRole(); }
+    public String getRole(String email) { return dbm.getUserByEmail(email).getRole(); }
 
     public boolean isRegistered(String email) {
         return null != dbm.getUserByEmail(email);

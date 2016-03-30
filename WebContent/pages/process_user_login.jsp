@@ -12,13 +12,15 @@
     else {
         // Check user credentials
         if (user.userLogIn(email, salt) == true) {
+
+
             session.setAttribute("userid", email);
-            session.setAttribute("role", user.getRole());
+            session.setAttribute("role", user.getRole(email));
             session.setAttribute("error", null);
 
             // Set session and redirect to pages
-            if (user.getRole().equals("admin")) {
-                response.sendRedirect("question_create.jsp");
+            if (user.getRole(email).equals("admin")) {
+             response.sendRedirect("question_create.jsp");
             } else response.sendRedirect("take_quiz.html");
 
         }  else {
