@@ -56,6 +56,8 @@ public class QuestionResponseBeanBase implements QuestionResponseCommonBusiness{
 
 	@Override
 	public boolean isCorrect() {
+		dbm.commitQuestionResponse(questionResponse);
+		
 		Question question = dbm.getQuestionById(questionResponse.getQuestionId());
 		
 		List<Answer> answers = question.getAnswers();
@@ -138,7 +140,20 @@ public class QuestionResponseBeanBase implements QuestionResponseCommonBusiness{
 
 	@Override
 	public void reset() {
+		questionResponse.setIsCorrect(true);
+		dbm.commitQuestionResponse(questionResponse);
+		questionResponse = null;
 		questionResponse = new QuestionResponse();
 		lastAttemptWrong = false;
+	}
+
+	@Override
+	public void setIsCorrect(boolean isCorrect) {
+		questionResponse.setIsCorrect(isCorrect);
+	}
+
+	@Override
+	public boolean getIsCorrect() {
+		return questionResponse.getIsCorrect();
 	}
 }

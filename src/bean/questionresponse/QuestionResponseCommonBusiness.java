@@ -18,6 +18,9 @@ public interface QuestionResponseCommonBusiness {
 	public boolean isLastAttemptWrong();
 	public void setLastAttemptWrong(boolean lastAttemptWrong);
 	
+	public void setIsCorrect(boolean isCorrect);
+	public boolean getIsCorrect();
+	
 	public void reset();
 	
 }

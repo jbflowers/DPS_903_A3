@@ -6,9 +6,9 @@
 	//questionResponse.incrementAttempts();
 	if (questionResponse.isCorrect()){
 		quiz.nextQuestion();
-		questionResponse.setLastAttemptWrong(false);
-		System.out.println("Is correct!");
 		questionResponse.reset();
+		System.out.println("Is correct!");
+		
 	}
 	else{
 		System.out.println("Is not correct!");

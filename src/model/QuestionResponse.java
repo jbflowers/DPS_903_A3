@@ -20,6 +20,8 @@ public class QuestionResponse {
     
     private int questionId;
     
+    private boolean isCorrect = false;
+
 	// Can be an id pointing to an answer or a text response depending on question type
     private String[] questionResponse;
 
@@ -49,6 +51,14 @@ public class QuestionResponse {
 
 	public void setQuestionId(int questionId) {
 		this.questionId = questionId;
+	}
+	
+	public boolean getIsCorrect() {
+		return isCorrect;
+	}
+
+	public void setIsCorrect(boolean isCorrect) {
+		this.isCorrect = isCorrect;
 	}
 	
     public QuestionResponse(){

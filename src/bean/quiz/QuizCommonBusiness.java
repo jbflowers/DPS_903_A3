@@ -6,4 +6,5 @@ public interface QuizCommonBusiness {
 	int getCurrentQuestionNumber();
 	Question getCurrentQuestion();
 	void nextQuestion();
+	void completeQuiz();
 }

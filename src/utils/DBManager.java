@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.List;
@@ -271,6 +272,16 @@ public class DBManager {
     	User user = (User) em.find(User.class, id);
     	
     	return user;
+    }
+    
+    public List<QuestionResponse> getQuestionResponsesQuestion(Question question){
+    	em.getTransaction().begin();
+    	
+    	String query = "SELECT e FROM QuestionResponse e WHERE e.questionId=" + question.getId() ;
+    	List<QuestionResponse> questionResponses = em.createQuery(query).getResultList();
+    	
+    	em.getTransaction().commit();
+    	return questionResponses;
     }
     
     public void close(){

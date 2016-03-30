@@ -102,8 +102,39 @@ public class Question {
 		Answers = answers;
 	}
 
+	public Question copy(){
+		Question a = this;
+		Question b = new Question();
+		
+		List<Answer> bAnswers = new ArrayList<Answer>();
+		for(Answer answer : a.getAnswers()){
+			bAnswers.add(answer.copy(b));
+		}
+		
+		b.setAnswers(bAnswers);
+		b.setAttemptsBeforeHint(a.getAttemptsBeforeHint());
+		b.setDifficulty(a.getDifficulty());
+		b.setHint(a.getHint());
+		b.setSubQuestions(a.getSubQuestions());
+		b.setText(a.getText());
+		b.setType(a.getType());
+		
+		return b;
+	}
 
-
+	public boolean equals(Question b){
+		
+		if(!b.getText().equals(this.getText())){
+			return false;
+		}
+		
+		if(!b.getType().equals(this.getType())){
+			return false;
+		}
+		
+		return true;
+	}
+	
     public Question(){
         super();
     }
