@@ -72,10 +72,6 @@ public class UserBeanBase implements UserCommonBusiness {
     @Override
     public String getRole() { return user.getRole(); }
 
-    public String getMessage() { return message; }
-
-    public void setMessage(String error) { message = error; }
-
     public boolean isRegistered(String email) {
         return null != dbm.getUserByEmail(email);
     }
