@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.NoResultException;
 
 import model.Answer;
 import model.Question;
@@ -272,10 +274,40 @@ public class DBManager {
     	
     	return user;
     }
+    
+    public List<QuestionResponse> getQuestionResponsesQuestion(Question question){
+    	em.getTransaction().begin();
+    	
+    	String query = "SELECT e FROM QuestionResponse e WHERE e.questionId=" + question.getId() ;
+    	List<QuestionResponse> questionResponses = em.createQuery(query).getResultList();
+    	
+    	em.getTransaction().commit();
+    	return questionResponses;
+    }
+    
+    public User getUserByEmail(String email){
+    	User user = (User) em.find(User.class, email);
+    	return user;
+    }
+
+	public boolean userLogIn(String email, String salt){
+		List<User> users = (List<User>) em.createNamedQuery("log in")
+				.setParameter("pass", salt)
+				.setParameter("email", email)
+		        .setMaxResults(1)
+				.getResultList();
+		if (users == null || users.isEmpty()) { return false; }
+		return true;
+	}
 
 	public void removeQuestionById(int id){
 		Question question = getQuestionById(id);
+
+		em.getTransaction().begin();
+
 		em.remove(question);
+
+		em.getTransaction().commit();
 	}
 
     public void close(){

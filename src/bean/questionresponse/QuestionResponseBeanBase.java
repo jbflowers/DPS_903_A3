@@ -14,19 +14,14 @@ import utils.DBManager;
 
 public class QuestionResponseBeanBase implements QuestionResponseCommonBusiness{
 	private QuestionResponse questionResponse;
-	private int attempts;
 	protected DBManager dbm;
 	private EntityManager em;
+	private boolean lastAttemptWrong = false;
 	
 	public QuestionResponseBeanBase(){
 		// Initialize db manager and other fields
 		dbm = new DBManager();
 		questionResponse = new QuestionResponse();
-	}
-	
-	@PreDestroy
-	public void destory(){
-		dbm.close();
 	}
 
 	@Override
@@ -61,6 +56,8 @@ public class QuestionResponseBeanBase implements QuestionResponseCommonBusiness{
 
 	@Override
 	public boolean isCorrect() {
+		dbm.commitQuestionResponse(questionResponse);
+		
 		Question question = dbm.getQuestionById(questionResponse.getQuestionId());
 		
 		List<Answer> answers = question.getAnswers();
@@ -128,9 +125,35 @@ public class QuestionResponseBeanBase implements QuestionResponseCommonBusiness{
 
 	@Override
 	public void incrementAttempts() {
-		attempts++;
+		questionResponse.setAttempt(questionResponse.getAttempt()+1);
 	}
 	
-	
+	@Override
+	public boolean isLastAttemptWrong() {
+		return lastAttemptWrong;
+	}
 
+	@Override
+	public void setLastAttemptWrong(boolean lastAttemptWrong) {
+		this.lastAttemptWrong = lastAttemptWrong;
+	}
+
+	@Override
+	public void reset() {
+		questionResponse.setIsCorrect(true);
+		dbm.commitQuestionResponse(questionResponse);
+		questionResponse = null;
+		questionResponse = new QuestionResponse();
+		lastAttemptWrong = false;
+	}
+
+	@Override
+	public void setIsCorrect(boolean isCorrect) {
+		questionResponse.setIsCorrect(isCorrect);
+	}
+
+	@Override
+	public boolean getIsCorrect() {
+		return questionResponse.getIsCorrect();
+	}
 }
