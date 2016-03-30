@@ -398,10 +398,53 @@
             
             <div class="row">
             	<div class="col-lg-6">
-					<div class="panel panel-primary">
-		                <div class="panel-heading">
-		                   RESULTS GO HERE
-		                </div>
+		            <% if (quiz.getQuizResponse().getMark() == 6){ %>
+			           	 
+			           	 <div class="panel panel-green">
+				             <div class="panel-heading">
+				                 Success!
+				             </div>
+				             <div class="panel-body">
+				                 <p>You got 6/6! 100%!</p>
+				             </div>
+				             <div class="panel-footer">
+				                 Great work!
+				             </div>
+				         </div>
+				         
+		            <%} %>
+		            <% if (quiz.getQuizResponse().getMark() < 6 && quiz.getQuizResponse().getMark() > 2){ %>
+			           	 
+			           	 <div class="panel panel-yellow">
+				             <div class="panel-heading">
+				                 Not bad!
+				             </div>
+				             <div class="panel-body">
+				                 <p>You got <%= quiz.getQuizResponse().getMark() %>/6.</p>
+				             </div>
+				             <div class="panel-footer">
+				                 Needs some improvement.
+				             </div>
+				         </div>
+				         
+		            <%} %>
+		            <% if (quiz.getQuizResponse().getMark() < 3){ %>
+			           	 
+			           	 <div class="panel panel-red">
+				             <div class="panel-heading">
+				                 You failed!
+				             </div>
+				             <div class="panel-body">
+				                 <p>You got <%= quiz.getQuizResponse().getMark() %>/6.</p>
+				             </div>
+				             <div class="panel-footer">
+				                 Needs a lot of work!
+				             </div>
+				         </div>
+				         
+		            <%} %>
+            	</div>
+            </div>
 			           	
 		                
 	                </div>

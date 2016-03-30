@@ -20,6 +20,7 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	protected Quiz quiz;
 	protected DBManager dbm;
 	private EntityManager em;
+	private QuizResponse quizResponse;
 	
 	public QuizBeanBase(){
 		System.out.println("MADE IT HERE YAY");
@@ -166,10 +167,17 @@ public class QuizBeanBase implements QuizCommonBusiness{
 			
 		}
 		
-		QuizResponse quizResponse = new QuizResponse();
+		quizResponse = new QuizResponse();
 		
 		System.out.println("MARK IS: " + mark);
 		quizResponse.setMark(mark);
+		quizResponse.setQuiz(quiz);
+		
+		dbm.commitQuizResponse(quizResponse);
+	}
+	
+	public QuizResponse getQuizResponse(){
+		return quizResponse;
 	}
 
 }

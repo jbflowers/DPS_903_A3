@@ -1,5 +1,7 @@
 package bean.questionresponse;
 
+import model.QuizResponse;
+
 public interface QuestionResponseCommonBusiness {
 	public void setAttempt(int attempt);
 	public int getAttempt();
