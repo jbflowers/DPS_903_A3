@@ -1,9 +1,8 @@
 <HTML>
 <jsp:useBean id="user" class="bean.user.UserBeanBase" scope="session"/>
 
-<%
-    // Log-in check
-    if (session.getAttribute("userid") == null || session.getAttribute("userid") == "") {
+// Log-in check
+<%  if (session.getAttribute("userid") == null || session.getAttribute("userid") == "") {
         response.sendRedirect("login.jsp");
     }
     else { %>

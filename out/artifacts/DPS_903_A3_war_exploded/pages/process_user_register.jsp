@@ -13,15 +13,19 @@
         session.setAttribute("error", null);
 
         // Check if user name is in database
-        if (user.isRegistered((String) request.getParameter("email")) == false) {
+        if (!user.isRegistered(request.getParameter("email"))) {
             System.out.println(user.toString());
             user.setEmail(email);
             user.setPassword(salt);
             user.setName(request.getParameter("name"));
             user.setRole(request.getParameter("role"));
-            if (user.commitUser() == true) {
+
+            // Save user to DB
+            if (user.commitUser()) {
                 session.setAttribute("userid", user.getEmail());
                 session.setAttribute("role", request.getParameter("role"));
+
+                // Redirect according to "role"
                 if (user.getRole(email).equals("admin")) {
                     response.sendRedirect("question_create.jsp");
                 } else response.sendRedirect("take_quiz.html");

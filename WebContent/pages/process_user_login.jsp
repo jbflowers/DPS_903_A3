@@ -11,9 +11,7 @@
     }
     else {
         // Check user credentials
-        if (user.userLogIn(email, salt) == true) {
-
-
+        if (user.userLogIn(email, salt)) {
             session.setAttribute("userid", email);
             session.setAttribute("role", user.getRole(email));
             session.setAttribute("loginerror", null);
