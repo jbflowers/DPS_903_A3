@@ -13,6 +13,7 @@ import model.Question;
 import model.QuestionResponse;
 import model.Quiz;
 import model.QuizResponse;
+import model.User;
 import utils.DBManager;
 
 public class QuizBeanBase implements QuizCommonBusiness{
@@ -21,6 +22,7 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	protected DBManager dbm;
 	private EntityManager em;
 	private QuizResponse quizResponse;
+	private User user;
 	
 	public QuizBeanBase(){
 		System.out.println("MADE IT HERE YAY");
@@ -36,7 +38,11 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		
 		// Make your quiz
 		quiz = new Quiz();
+		quizResponse = new QuizResponse();
 		
+		// In order to be here in the first place, you must be logged in, so set user
+		quizResponse.setUser(user);
+
 		// Make questions
 		List<Question> tempQuestions = new ArrayList<Question>();
 
@@ -168,7 +174,7 @@ public class QuizBeanBase implements QuizCommonBusiness{
 			
 		}
 		
-		quizResponse = new QuizResponse();
+
 		
 		System.out.println("MARK IS: " + mark);
 		quizResponse.setMark(mark);
@@ -179,6 +185,13 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	
 	public QuizResponse getQuizResponse(){
 		return quizResponse;
+	}
+
+	@Override
+	public void setUser(String email) {
+		if (user == null){
+			user = dbm.getUserByEmail(email);
+		}
 	}
 
 }

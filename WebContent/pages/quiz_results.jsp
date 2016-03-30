@@ -3,6 +3,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<%
+// Check if user is logged in
+boolean loggedIn = request.getSession().getAttribute("userid") != null;
+
+if (!loggedIn){
+	// Redirect
+	response.sendRedirect("login.jsp");
+}
+%>
+
 <% 
 	if (quiz.getCurrentQuestionNumber() != 7){
 		response.sendRedirect("quiz_question.jsp");

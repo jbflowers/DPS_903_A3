@@ -1,6 +1,15 @@
 <HTML>
 <jsp:useBean id="quiz" scope="session" class="bean.quiz.QuizBean" scope="session"/>
 <jsp:useBean id="questionResponse" scope="session" class="bean.questionresponse.QuestionResponseBean" scope="session"/>
+<%
+// Check if user is logged in
+boolean loggedIn = request.getSession().getAttribute("userid") != null;
+
+if (!loggedIn){
+	// Redirect
+	response.sendRedirect("login.jsp");
+}
+%>
 <% 
 	questionResponse.commitQuestionResponse();
 	//questionResponse.incrementAttempts();

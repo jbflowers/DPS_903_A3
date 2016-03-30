@@ -9,4 +9,5 @@ public interface QuizCommonBusiness {
 	void nextQuestion();
 	void completeQuiz();
 	public QuizResponse getQuizResponse();
+	public void setUser(String email);
 }

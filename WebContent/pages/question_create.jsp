@@ -1,7 +1,54 @@
+<%@ page import="model.Answer" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="bean.question.QuestionBean" %>
 <jsp:useBean id="question" scope="session" class="bean.question.QuestionBean"/>
-<jsp:setProperty name='question' property="*"/>
 <!DOCTYPE html>
 <html lang="en">
+<%!
+    // temporary variables
+    List<Answer> tempAnswers = new ArrayList<Answer>();
+    Answer tempAnswer;
+    int numOfChoices;
+    String[] choices;
+%>
+<%
+    if (request.getParameter("text") != null && request.getParameter("edit") == null) {
+
+        // set possible choices / answers to this question
+        numOfChoices = Integer.parseInt(request.getParameter("numberOfChoices"));
+
+        choices = request.getParameterValues("choice[]");
+
+        for (int i = 0; i < numOfChoices; i++) {
+            tempAnswer = new Answer();
+            tempAnswer.setText(choices[i]);
+
+            if (request.getParameter("correct" + i).equals("true")) {
+                tempAnswer.setIsCorrect(true);
+            } else {
+                tempAnswer.setIsCorrect(false);
+            }
+
+            tempAnswer.setQuestion(question.getQuestion());
+            tempAnswers.add(tempAnswer);
+        }
+
+        question.setAnswers(tempAnswers);
+
+        // finally redirect to save the question
+        response.sendRedirect("process_question_create.jsp");
+
+    }
+
+    if (request.getParameter("edit") != null && request.getParameter("edit").equals("true")){
+        System.out.println("trying to edit the page");
+        question.setQuestion(question.getQuestionById(Integer.parseInt(request.getParameter("id"))));
+    } else {
+        question = new QuestionBean();
+    }
+
+%>
 
 <head>
 
@@ -372,13 +419,20 @@
         <%--<!-- /.navbar-static-side -->--%>
     <%--</nav>--%>
 
+    <jsp:setProperty name="question" property="*" />
+    <%! String [] levelsOfDifficulty = new String[3];
+        String [] typesOfQuestion = new String[5];
+    %>
     <div id="page-wrapper">
 
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Create a Quiz Question</h1>
-                <form method="get">
+                <form method="POST">
                     <div class="form-group">
+
+                        <label for="text">Question Description</label>
+                        <input type="text" name="text" id="text" placeholder="Enter problem description here..." class="form-control" value="<%=question.getText()%>>
                         <label for="type">Type of Question</label>
                         <select name="type" class="form-control" id="type">
                             <option value="check">Checkbox</option>
@@ -387,16 +441,30 @@
                             <option value="number">Numeric Input</option>
                             <option value="text">Text Input</option>
                         </select>
+                        <label for="difficulty">Difficulty of Question</label>
+                        <select name="difficulty" class="form-control" id="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Difficult</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hint">Hint to Display to Student: </label>
+                        <input type="text" name="hint" id="hint" class="form-control" placeholder="Hint goes here..." value="<%=question.getHint()%>">
+                        <label for="attemptsBeforeHint">Number of Attempts Before a Hint is Displayed: </label>
+                        <input type="number" name="attemptsBeforeHint" id="attemptsBeforeHint" class="form-control" placeholder="Number of Attempts (ie. '3')..." value="<%=question.getAttemptsBeforeHint()%>">
                     </div>
 
                     <div class="form-group oneMany manyMany">
                         <label for="numberOfChoices">Number of Possible Choices?</label>
-                        <input type="number" name="numberOfChoices" id="numberOfChoices" class="form-control" placeholder="Enter the number of choices (ie. '5')">
+                        <input type="number" name="numberOfChoices" id="numberOfChoices" class="form-control" placeholder="Enter the number of choices (ie. '5')..." value="<%=question.getAnswers().size()%>">
                     </div>
+
 
                     <div class="form-group choice" style="display:none">
                         <label for="choice0">Choice #1: </label>
-                        <input type="text" name="choice" id="choice0">
+                        <input type="text" name="choice[]" id="choice0" class="form-control">
                         <label class="radio-inline">
                             <input type="radio" name="correct0" value="true"> Correct
                         </label>
@@ -404,7 +472,7 @@
                             <input type="radio" name="correct0" value="false"> Incorrect
                         </label>
                     </div>
-                    <button type="submit">Create New Quiz Question</button>
+                    <button type="submit" class="btn btn-default">Create New Quiz Question</button>
                 </form>
                 <%--<jsp:getProperty name="quiz" property="currentQuestion"/>--%>
             </div>
@@ -455,17 +523,19 @@
 
         $('#numberOfChoices').on("keyup", function(){
             console.log("key up event here");
-            var number = parseInt($(this).val()), i=0, choices = $(".choice").length, copy;
+            var number = parseInt($(this).val()), i=0, choices = $(".choice").length, copy, button;
 
             if(choices < number){
                 for(i=choices; i<number; i++){
                     copy = $($(".choice")[0]).clone(true, true);
                     $(copy.find("label")[0]).attr("for", "choice"+(i)).html("Choice #"+(i+1)+(": "));
                     $(copy.find("input")[0]).attr("id", "choice"+(i));
-                    $(copy.find("input")[1]).attr("name", "choice"+(i));
-                    $(copy.find("input")[2]).attr("name", "choice"+(i));
+                    $(copy.find("input")[1]).attr("name", "correct"+(i));
+                    $(copy.find("input")[2]).attr("name", "correct"+(i));
 
-                    copy.appendTo("form");
+                    button = $($("button")[$("button").length-1]);
+
+                    copy.insertBefore(button);
                 }
             } else {
                 for(i=choices; i>number-1; i--){
@@ -482,20 +552,6 @@
 
 
         });
-        /*
-         <div class="form-group choice" style="display:none">
-         <label>Choice # : </label>
-         <input type="text" name="answer">
-         <label class="radio-inline">
-         <input type="radio" name="correct" value="true"> Correct
-         </label>
-         <label class="radio-inline">
-         <input type="radio" name="correct" value="false"> Incorrect
-         </label>
-         </div>
-         */
-
-
     })
 </script>
 
