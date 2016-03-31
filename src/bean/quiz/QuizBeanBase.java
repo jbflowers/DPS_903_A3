@@ -127,6 +127,12 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		
 		quizResponse = new QuizResponse();
 		quizResponse.setUser(user);
+		
+		List<QuizResponse> responses = user.getQuizResponses();
+		responses.add(quizResponse);
+		user.setQuizResponses(responses);
+		dbm.commitUser(user);
+		
 		// Calculate mark
 		int mark = 0;
 		
