@@ -33,7 +33,6 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		
 		// Make your quiz
 		quiz = new Quiz();
-		quizResponse = new QuizResponse();
 
 		// Make questions
 		List<Question> tempQuestions = new ArrayList<Question>();
@@ -94,9 +93,6 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	}
 	
 	public void start(){
-		// In order to be here in the first place, you must be logged in, so set user
-		quizResponse.setUser(user);
-		
 		// And start the clock
 		startTime = System.currentTimeMillis();
 	}
@@ -128,6 +124,9 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		quiz.setStatus("complete");
 		dbm.commitQuiz(quiz);
 
+		
+		quizResponse = new QuizResponse();
+		quizResponse.setUser(user);
 		// Calculate mark
 		int mark = 0;
 		
