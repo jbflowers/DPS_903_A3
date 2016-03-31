@@ -178,7 +178,6 @@ else{
 			                    else if (questionType.equals("number")){ %>
 			                    
 			                    <div class="form-group">
-		                            <label>Text Input</label>
 		                            <input class="form-control" type="number" name="questionResponse">
 		                            <p class="help-block">Example block-level help text here.</p>
 		                        </div>
@@ -187,14 +186,13 @@ else{
 			                    else if (questionType.equals("mc")){ %>
 			                    
 			                    <div class="form-group">
-		                            <label>Radio Buttons</label>
 		                            <div class="radio">
 		                                <%
 		                                
 		                                for(int i = 0; i < answerIds.length; i++){ %>
 		                                
 		                                <label>
-		                                    <input name="questionResponse" id="<%= answerIds[i] %>" value="<%= answerIds[i] %>" checked="" type="radio"><%= answerTexts[i] %>
+		                                    <input name="questionResponse" id="<%= answerIds[i] %>" value="<%= answerIds[i] %>" <% if(i == 0) out.print("checked=''"); %> type="radio"><%= answerTexts[i] %>
 		                                </label>
 		                                <br>
 		                                <%} %>
