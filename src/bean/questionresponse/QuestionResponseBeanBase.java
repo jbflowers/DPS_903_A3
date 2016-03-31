@@ -2,11 +2,6 @@ package bean.questionresponse;
 
 import java.util.List;
 
-import javax.annotation.PreDestroy;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
-
 import model.Answer;
 import model.Question;
 import model.QuestionResponse;
@@ -15,7 +10,6 @@ import utils.DBManager;
 public class QuestionResponseBeanBase implements QuestionResponseCommonBusiness{
 	private QuestionResponse questionResponse;
 	protected DBManager dbm;
-	private EntityManager em;
 	private boolean lastAttemptWrong = false;
 	
 	public QuestionResponseBeanBase(){
@@ -56,22 +50,14 @@ public class QuestionResponseBeanBase implements QuestionResponseCommonBusiness{
 
 	@Override
 	public boolean isCorrect() {
+		// Commit this response
 		dbm.commitQuestionResponse(questionResponse);
 		
+		// Get the question and its answers
 		Question question = dbm.getQuestionById(questionResponse.getQuestionId());
 		
 		List<Answer> answers = question.getAnswers();
 		String type = question.getType();
-		
-		System.out.println("QuestionResponse in QuestionResponseBean.isCorrect(): ");
-		for(int i = 0; i < questionResponse.getQuestionResponse().length; i++){
-			System.out.println("QuestionResponse.questionResponse: " + questionResponse.getQuestionResponse()[i]);
-		}
-		
-		System.out.println("Answers in QuestionResponseBean.isCorrect(): ");
-		for(int i = 0; i < answers.size(); i++){
-			System.out.println("Answer text 1:" + answers.get(i).getText());
-		}
 		
 		// If the question is text or number, the question response is a value to match
 		if (type.equals("text") || type.equals("number")){
@@ -81,7 +67,7 @@ public class QuestionResponseBeanBase implements QuestionResponseCommonBusiness{
 				}
 			}
 		}
-		// Really no idea what this implies, so lets ignore it for now
+		// If the question is check, check each answer individually
 		else if (type.equals("check")){
 			String[] responses = questionResponse.getQuestionResponse();
 			int answerCount = 0;
@@ -106,7 +92,7 @@ public class QuestionResponseBeanBase implements QuestionResponseCommonBusiness{
 				return true;
 			}
 		}
-		// Otherwise, question response is an id to the answer
+		// Otherwise, question response is an id to the answer chosen
 		else {
 			int answerId = new Integer(questionResponse.getQuestionResponse()[0]);
 			Answer answer = dbm.getAnswerById(answerId);
@@ -140,6 +126,7 @@ public class QuestionResponseBeanBase implements QuestionResponseCommonBusiness{
 
 	@Override
 	public void reset() {
+		// Reset bean to default state
 		questionResponse.setIsCorrect(true);
 		dbm.commitQuestionResponse(questionResponse);
 		questionResponse = null;

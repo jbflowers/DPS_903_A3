@@ -11,7 +11,6 @@ if (loggedIn){
 	quiz.setUser(userId);
 }
 else{
-	// Redirect
 	response.sendRedirect("login.jsp");
 }
 
@@ -20,36 +19,37 @@ else{
 
 <!DOCTYPE html>
 <html lang="en">
-
 <% 
+	// Determine whether we've been provided empty input or a wrong answer
 	boolean emptyInput = false;
 	boolean failedAttempt = questionResponse.isLastAttemptWrong();	
 	boolean redirect = false;
 	
-	System.out.println("Attempt number: " + questionResponse.getAttempt());
-	System.out.println("questionResponse: " + request.getParameter("questionResponse"));
-	
+	// If the quiz is done, go to results
 	if (quiz.getCurrentQuestionNumber() == 7){
 		response.sendRedirect("quiz_results.jsp");
 	}
 	
+	// If this is not their first attempt and we got nothing, they provided empty input
 	if (questionResponse.getAttempt() > 0 && (request.getParameter("questionResponse") == null || request.getParameter("questionResponse").length() == 0)){
 		emptyInput = true;
 	}
+	// Otherwise we got an answer, so we should process it
 	else if (questionResponse.getAttempt() != 0){
 		response.sendRedirect("process_question_response.jsp");
 		redirect = true;
 	}
 	
+	// However, if their last attempt was wrong, it was not empty input, we were just redirected
 	if (questionResponse.isLastAttemptWrong()){
 		emptyInput = false;
 		questionResponse.setLastAttemptWrong(false);
 	}
 	
+	// Finally if we weren't redirected, increment attempts
 	if (!redirect)
 		questionResponse.incrementAttempts();
 %>
-
 
 <head>
 
@@ -426,6 +426,7 @@ else{
 		<jsp:setProperty name="questionResponse" property="questionResponse" /> 
         <div id="page-wrapper">
  			<% 
+ 				// Get all necessary information for this page
  				int questionNumber = quiz.getCurrentQuestionNumber();
  				String questionText = quiz.getCurrentQuestion().getText();
 				String questionType = quiz.getCurrentQuestion().getType();
@@ -439,7 +440,6 @@ else{
 				}
 
 				questionResponse.setQuestionId(quiz.getCurrentQuestion().getId());
-		
  			%>
             <div class="row">
                 <div class="col-lg-12">
@@ -449,8 +449,9 @@ else{
             </div>
             <!-- /.row -->
             
-            <% 	System.out.println("emptyInput is : " + emptyInput);
-            	if (emptyInput){ %>
+            
+            <% // Handles validation of empty input and hints %>
+            <% if (emptyInput){ %>
             <div class="row">
             	<div class="col-lg-12">
 	            	<div class="alert alert-danger">
@@ -479,6 +480,7 @@ else{
 	                </div>
 	            </div>
             <%} %>
+            <% // Main question starts here %>
             <div class="row">
             	<div class="col-lg-6">
 					<div class="panel panel-primary">
@@ -494,8 +496,8 @@ else{
 	                                <input class="form-control" placeholder="Enter text" name="questionResponse">
 	                            </div>    
 			                    
-			                    <%} 
-			                    if (questionType.equals("number")){ %>
+			                    <%}
+			                    else if (questionType.equals("number")){ %>
 			                    
 			                    <div class="form-group">
 		                            <label>Text Input</label>
@@ -504,7 +506,7 @@ else{
 		                        </div>
 			                    
 			                    <%}
-			                    if (questionType.equals("mc")){ %>
+			                    else if (questionType.equals("mc")){ %>
 			                    
 			                    <div class="form-group">
 		                            <label>Radio Buttons</label>
@@ -522,7 +524,7 @@ else{
 		                        </div>
 			                    
 			                    <%} 
-			                    if (questionType.equals("check")){ %> 
+			                    else if (questionType.equals("check")){ %> 
 			                    
 	                    		<div class="form-group">
 	                                
@@ -538,8 +540,7 @@ else{
 	                            </div>
 	                            
 			                    <%}
-			                    
-			                    if(questionType.equals("drop")){ %>
+			                    else if(questionType.equals("drop")){ %>
 			                      
 			                    <div class="form-group">
 		                            <label>Selects</label>

@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PreDestroy;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 
 import model.Answer;
 import model.Question;
@@ -20,18 +17,10 @@ public class QuizBeanBase implements QuizCommonBusiness{
 	private int currentQuestionNumber;
 	protected Quiz quiz;
 	protected DBManager dbm;
-	private EntityManager em;
 	private QuizResponse quizResponse;
 	private User user;
 	
 	public QuizBeanBase(){
-		System.out.println("MADE IT HERE YAY");
-		
-		// If we have a quiz already, exit
-		if (quiz != null){
-			return;
-		}
-		
 		// Initialize db manager and other fields
 		dbm = new DBManager();
 		currentQuestionNumber = 1;
@@ -45,11 +34,9 @@ public class QuizBeanBase implements QuizCommonBusiness{
 
 		// Make questions
 		List<Question> tempQuestions = new ArrayList<Question>();
-
-		System.out.println("Id be interested to know");
 		
-		boolean containsQuestion;
 		// Make three easy questions
+		boolean containsQuestion;
 		while(tempQuestions.size() != 3){
 			containsQuestion = false;
 			Question easyQuestion = dbm.getRandomEasyQuestion();
@@ -131,9 +118,11 @@ public class QuizBeanBase implements QuizCommonBusiness{
 
 	@Override
 	public void completeQuiz() {
+		// Set the status of the quiz and commit
 		quiz.setStatus("complete");
 		dbm.commitQuiz(quiz);
 
+		// Calculate mark
 		int mark = 0;
 		
 		for(Question question : quiz.getQuestions()){
@@ -146,40 +135,21 @@ public class QuizBeanBase implements QuizCommonBusiness{
 					correctAnswers++;
 				}
 			}
-			System.out.println("___________________________________");
 
 			// Calculate number of correct attempts
 			List<QuestionResponse> questionResponses = dbm.getQuestionResponsesQuestion(question);
 			for(QuestionResponse questionResponse : questionResponses){
-				
-				System.out.println("QUESTIONRESPONSE ISCORRECT: " + questionResponse.getIsCorrect());
-				
-				
-				System.out.println("QUIZ RESPONSES: ");
-				for(int i = 0; i < questionResponse.getQuestionResponse().length; i++){
-					System.out.println("QUIZ RESPONSE: " + questionResponse.getQuestionResponse()[i]);
-				}
-				System.out.println("QUIZ RESPONSE ATTEMPTS: " + questionResponse.getAttempt());
-				
 				if(questionResponse.getIsCorrect() && questionResponse.getAttempt() == 1){
 					correctAttempts+=questionResponse.getQuestionResponse().length;
 				}
 			}
 			
-			System.out.println("CORRECT ATTEMPTS " + correctAttempts);
-			System.out.println("CORRECT ANSWERS " + correctAnswers);
-			
 			if (correctAttempts == correctAnswers){
-				System.out.println("Mark was: " + mark);
 				mark++;
-				System.out.println("Mark is: " + mark);
 			}
 			
 		}
-		
 
-		
-		System.out.println("MARK IS: " + mark);
 		quizResponse.setMark(mark);
 		quizResponse.setQuiz(quiz);
 		
@@ -196,5 +166,8 @@ public class QuizBeanBase implements QuizCommonBusiness{
 			user = dbm.getUserByEmail(email);
 		}
 	}
+	
+	
+	
 
 }
