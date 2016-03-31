@@ -25,7 +25,17 @@ public class QuizResponse {
     @OneToMany
     private List<QuestionResponse> questionResponses = new ArrayList<QuestionResponse>();
     
-    public int getId() {
+    String userId;
+    
+    public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public int getId() {
 		return id;
 	}
 
@@ -48,12 +58,13 @@ public class QuizResponse {
 	public void setQuiz(Quiz quiz) {
 		this.quiz = quiz;
 	}
-
+	
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
+		this.userId = user.getEmail();
 		this.user = user;
 	}
 

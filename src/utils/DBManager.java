@@ -249,6 +249,16 @@ public class DBManager {
     	return user;
     }
 
+    public List<QuizResponse> getQuizResponsesForUser(User user){
+    	em.getTransaction().begin();
+    	
+    	String query = "SELECT e FROM QuizResponse e WHERE e.userId=" + user.getEmail();
+    	List<QuizResponse> quizResponses = em.createQuery(query).getResultList();
+    	
+    	em.getTransaction().commit();
+    	return quizResponses;
+    }
+    
 	public boolean userLogIn(String email, String salt){
 		List<User> users = (List<User>) em.createNamedQuery("log in")
 				.setParameter("pass", salt)
