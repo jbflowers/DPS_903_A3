@@ -83,7 +83,7 @@ public class DBManager {
     
     public List<Question> getQuestions(){
     	em.getTransaction().begin();
-    	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e").getResultList();
+    	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e ORDER BY e.id").getResultList();
     	em.getTransaction().commit();
     	return questions;
     }

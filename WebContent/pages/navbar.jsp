@@ -1,3 +1,4 @@
+<jsp:useBean id="user" scope="session" class="bean.user.UserBeanBase"/>
 <% if(session != null && ((session.getAttribute("userid") != null )&& (session.getAttribute("userid") != ""))
         && ((session.getAttribute("role") != null) && session.getAttribute("role") != "")) {
     System.out.println(session.getAttribute("userid")); %>
@@ -10,7 +11,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.jsp">Quiz Creator</a>
+        <a class="navbar-brand" href="index.jsp">Welcome, <%= session.getAttribute("userid")%>!</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -245,27 +246,26 @@
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quizzes <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <% if (session.getAttribute("role").equals("admin")){ %>
-                            <li> <a href="#">Create Quizz </a> </li>
-                            <li> <a href="question_create.jsp">Questions</a></li>
-                            <li> <a href="#"> All Quizes </a></li>
+                            <li> <a href="question_create.jsp">Create Quiz</a></li>
+                            <li> <a href="instructor_table.jsp"> All Questions </a></li>
                         <% } else { %>
                             <li><a href="take_quiz.jsp">Take Quiz</a></li>
-                            <li><a href="#">View My Marks </a></li>
+                            <li><a href="history_table.jsp">View My Marks </a></li>
                         <% } %>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quiz Results <span class="fa arrow"></span></a>
+                    <a href="history_table.jsp"><i class="fa fa-bar-chart-o fa-fw"></i> Quiz Results <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <% if (session.getAttribute("role").equals("admin")){ %>
-                            <li> <a href="#"> View Student Marks </a> </li>
+                            <li> <a href="history_table.jsp"> View Student Marks </a> </li>
                             <li> <a href="question_create.jsp"> Result Chart </a></li>
                             <li> <a href="#"> Metrics </a></li>
                         <% } else { %>
-                            <li><a href="take_quiz.jsp">My Marks</a></li>
-                            <li><a href="#"> Statistics </a></li>
+                            <li><a href="history_table.jsp">My Marks</a></li>
+                            <li><a href="history_table.jsp"> Statistics </a></li>
                         <% } %>
                     </ul>
                     <!-- /.nav-second-level -->

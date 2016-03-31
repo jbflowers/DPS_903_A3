@@ -1,4 +1,5 @@
 <%@ page import="model.Answer" %>
+<%@ page import="model.Question" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="bean.question.QuestionBean" %>
@@ -26,10 +27,18 @@
     List<Answer> oldAnswers;
 %>
 <%
-    if (request.getParameter("text") != null && request.getParameter("edit") != null) {
+    if (request.getParameter("text") != null) {
         oldAnswers = new ArrayList<Answer>();
         tempAnswers = new ArrayList<Answer>();
-        question.setIsEdit(false);
+
+        if(request.getParameter("edit") != null && request.getParameter("edit").equals("true")){
+            question.setIsEdit(true);
+        } else {
+            question.setQuestion(new Question());
+            question.setIsEdit(false);
+
+        }
+
         // set possible choices / answers to this question
         numOfChoices = Integer.parseInt(request.getParameter("numberOfChoices"));
 
