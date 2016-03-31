@@ -410,8 +410,8 @@
                     </thead>
                     <tbody>
                         <% for(Question question : instructor.getAllQuestions()){
-                            counter++;
-                            if(question.isUsedInQuiz()){
+                            if(!question.isUsedInQuiz()){
+                            	counter++;
                         %>
                         <tr>
                             <td><%=counter%></td>
