@@ -279,7 +279,7 @@ public class DBManager {
 		}
 
 	}
-
+	
     public void close(){
     	em.close();
     }
