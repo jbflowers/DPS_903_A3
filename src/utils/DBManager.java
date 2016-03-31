@@ -216,6 +216,10 @@ public class DBManager {
     
     public String commitUser(User user){
     	
+    	for(QuizResponse qr : user.getQuizResponses()){
+    		commitQuizResponse(qr);
+    	}
+    	
     	em.getTransaction().begin();
     	em.persist(user);
     	em.getTransaction().commit();
