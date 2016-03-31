@@ -411,6 +411,7 @@
                     <tbody>
                         <% for(Question question : instructor.getAllQuestions()){
                             counter++;
+                            if(question.isUsedInQuiz()){
                         %>
                         <tr>
                             <td><%=counter%></td>
@@ -422,7 +423,8 @@
                                 <a href="instructor_table.jsp?id=<%=question.getId()%>&remove=true">Delete</a>
                             </td>
                         </tr>
-                        <% } %>
+                        <% }
+                        } %>
                     </tbody>
                 </table>
                 <%--<jsp:getProperty name="quiz" property="currentQuestion"/>--%>
