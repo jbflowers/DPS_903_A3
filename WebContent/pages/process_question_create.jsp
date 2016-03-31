@@ -8,8 +8,8 @@
 
 
     if(question.getIsEdit() == true){
-        //question.updateQuestion();
         question.setIsEdit(false);
+        question.updateQuestion();
     } else {
         question.commitQuestion();
     }

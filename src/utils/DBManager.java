@@ -143,10 +143,11 @@ public class DBManager {
 
 	public void updateQuestion(Question question){
 		em.getTransaction().begin();
+
 		for(Answer answer: question.getAnswers()){
 			em.persist(answer);
 		}
-		em.merge(question);
+		//em.merge(question);
 
 		em.getTransaction().commit();
 	}

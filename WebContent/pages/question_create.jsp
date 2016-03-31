@@ -7,14 +7,16 @@
 <html lang="en">
 <%!
     // temporary variables
-    List<Answer> tempAnswers = new ArrayList<Answer>();
+    List<Answer> tempAnswers;
     Answer tempAnswer;
     int numOfChoices;
     String[] choices;
-    List<Answer> oldAnswers = new ArrayList<Answer>();
+    List<Answer> oldAnswers;
 %>
 <%
     if (request.getParameter("text") != null && request.getParameter("edit") != null) {
+        oldAnswers = new ArrayList<Answer>();
+        tempAnswers = new ArrayList<Answer>();
         question.setIsEdit(false);
         // set possible choices / answers to this question
         numOfChoices = Integer.parseInt(request.getParameter("numberOfChoices"));
@@ -567,7 +569,7 @@
                     copy.insertBefore(button);
                 }
             } else {
-                for(i=choices; i>number-1 && i > 1; i--){
+                for(i=choices; i>number-1 && i > 0 ; i--){
                     $($(".choice")[i]).remove();
                 }
             }
