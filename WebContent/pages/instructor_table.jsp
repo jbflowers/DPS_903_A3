@@ -392,7 +392,7 @@
     </nav>
 
     <jsp:setProperty name="instructor" property="*" />
-    <%! int counter=0; %>
+    <%! int counter; %>
     <div id="page-wrapper">
 
         <div class="row">
@@ -409,7 +409,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% for(Question question : instructor.getAllQuestions()){
+                        <%
+                            counter = 0;
+                            for(Question question : instructor.getAllQuestions()){
                             counter++;
                         %>
                         <tr>

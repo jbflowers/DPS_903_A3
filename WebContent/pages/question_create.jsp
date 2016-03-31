@@ -502,17 +502,40 @@
 <script>
     $(function() {
 
-        function checkChoiceNumber(){
-            console.log("key up event here");
-            var number = parseInt($(this).val()), i=0, choices = $(".choice").length, copy, button;
+        function checkChoiceNumber(repopulate){
+            console.log("checking number of choices...");
+            var number = parseInt($("#numberOfChoices").val()), i=0, choices = $(".choice").length, copy, button, answers=[], correct=[];
+
+            <%
+
+             for(Answer answer: question.getAnswers()){
+            %>
+                answers.push("<%=answer.getText()%>");
+                correct.push("<%=answer.getIsCorrect()%>");
+            <%
+             }
+
+            %>
+
 
             if(choices < number){
                 for(i=choices; i<number; i++){
+
                     copy = $($(".choice")[0]).clone(true, true);
+
+                    // Label for Choice...
                     $(copy.find("label")[0]).attr("for", "choice"+(i)).html("Choice #"+(i+1)+(": "));
-                    $(copy.find("input")[0]).attr("id", "choice"+(i));
-                    $(copy.find("input")[1]).attr("name", "correct"+(i));
-                    $(copy.find("input")[2]).attr("name", "correct"+(i));
+
+                    // id for choice input
+                    $(copy.find("input")[0]).attr("id", "choice"+(i)).val("");
+
+                    // correct radio
+                    $(copy.find("input")[1]).attr("name", "correct"+(i))
+                            .removeAttr("selected").prop("checked", false);
+
+                    // incorrect radio
+                    $(copy.find("input")[2]).attr("name", "correct"+(i))
+                            .removeAttr("selected").prop("checked", false);
 
                     button = $($("button")[$("button").length-1]);
 
@@ -530,6 +553,23 @@
             } else {
                 $(".choice").hide();
             }
+
+            for(i=0; i<number && repopulate; i++){
+                if(answers[i]){
+                    $($($(".choice")[i]).find("input")[0]).val(answers[i]);
+                }
+
+                if(correct[i]){
+                    if(correct[i] === "true"){
+                        $($($(".choice")[i]).find("input")[1]).attr("selected", "true");
+                        $($($(".choice")[i]).find("input")[1]).prop("checked", "true");
+                    } else {
+                        $($($(".choice")[i]).find("input")[2]).attr("selected", "true");
+                        $($($(".choice")[i]).find("input")[2]).prop("checked", "true");
+                    }
+                }
+            }
+
         }
 
 
@@ -550,7 +590,7 @@
 
         });
 
-        checkChoiceNumber();
+        checkChoiceNumber(true);
 
         $('#numberOfChoices').on("keyup change", checkChoiceNumber);
     })

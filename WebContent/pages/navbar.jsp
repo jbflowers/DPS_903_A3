@@ -241,14 +241,16 @@
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Quizzes <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <% if (session.getAttribute("role").equals("admin")){ %>
+                        <% if (session.getAttribute("role") != null && session.getAttribute("role").equals("admin")){ %>
                         <li> <a href="#">Create Quizz </a> </li>
                         <li> <a href="question_create.jsp">Questions</a></li>
                         <li> <a href="#"> All Quizes </a></li>
-                        <% } else { %>
+                        <% } else if(session.getAttribute("role") != null) { %>
                         <li><a href="take_quiz.html">Take Quiz</a></li>
                         <li><a href="#">View My Marks </a></li>
-                        <% } %>
+                        <% } else {
+                            response.sendRedirect("index.jsp");
+                        } %>
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
