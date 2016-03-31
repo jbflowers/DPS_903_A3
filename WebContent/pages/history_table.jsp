@@ -1,12 +1,14 @@
 <%@ page import="model.QuizResponse" %>
-<jsp:useBean id="history" scope="session" class="bean.history.HistoryBean"/>
+<%@ page import="java.util.List" %>
+<jsp:useBean id="history" scope="session" class="bean.historybean.HistoryBean"/>
 
 <% if(session != null && ((session.getAttribute("userid") != null ) || (session.getAttribute("userid") != ""))
         && ((session.getAttribute("role") != null) && session.getAttribute("role") != "")) {
     if (!session.getAttribute("role").equals("admin")) {
-        history.setUser(session.getAttribute("userId"));
+        history.setUser((String)session.getAttribute("userId"));
     }
 %>
+<%! List<QuizResponse> quizResponses; %>
 <!DOCTYPE html>
 <html lang="en">
 <%!
@@ -83,27 +85,29 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Quiz Description</th>
-                        <th>Type</th>
-                        <th>Difficulty</th>
-                        <th>Actions</th>
+                        <th>Mark Received</th>
+                        <th>Time took (minutes)</th>
+                        <th>User</th>
+                        <th>Quiz Id</th>
                     </tr>
                     </thead>
                     <tbody>
                     <%
                         counter = 0;
-                        for(QuizResponse quizResponse : history.getAllQuizResponses()){
+                        if (!session.getAttribute("role").equals("admin")) {
+                            quizResponses = history.getQuizResponsesForUser();
+                        } else {
+                            quizResponses = history.getAllQuizResponses();
+                        }
+                            for(QuizResponse quizResponse : quizResponses){
                                 counter++;
                     %>
                     <tr>
                         <td><%=counter%></td>
-                        <td><%=quizResponse.%></td>
-                        <td><%=question.getType()%></td>
-                        <td><%=question.getDifficulty()%></td>
-                        <td>
-                            <a href="question_create.jsp?id=<%=question.getId()%>&edit=true">Edit</a> |
-                            <a href="instructor_table.jsp?id=<%=question.getId()%>&remove=true">Delete</a>
-                        </td>
+                        <td><%=quizResponse.getMark()%></td>
+                        <td><%=(quizResponse.getTimestamp() - quizResponse.getQuiz().getTimestamp())/1000/60%></td>
+                        <td><%=quizResponse.getUser().getEmail()%></td>
+                        <td><%=quizResponse.getQuiz().getId()%></td>
                     </tr>
                     <% } %>
                     </tbody>
