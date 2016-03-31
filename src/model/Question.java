@@ -19,8 +19,9 @@ public class Question {
     private String text;
     private int attemptsBeforeHint;
     private String hint;
+    private boolean usedInQuiz = false;
 
-    @ManyToOne
+	@ManyToOne
     private Quiz quiz;
 
     // drop down case with inner questions
@@ -133,6 +134,14 @@ public class Question {
 		}
 		
 		return true;
+	}
+	
+    public boolean isUsedInQuiz() {
+		return usedInQuiz;
+	}
+
+	public void setUsedInQuiz(boolean usedInQuiz) {
+		this.usedInQuiz = usedInQuiz;
 	}
 	
     public Question(){

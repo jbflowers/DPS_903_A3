@@ -87,7 +87,10 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		// Make deep copies for all questions
 		List<Question> finalQuestions = new ArrayList<Question>();
 		for(Question curQuestion : tempQuestions){
-			finalQuestions.add(curQuestion.copy());
+			Question temp = curQuestion.copy();
+			temp.setUsedInQuiz(true);
+			finalQuestions.add(temp);
+			
 		}
 		
 		// Set fields

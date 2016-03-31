@@ -1,4 +1,3 @@
-<HTML>
 <jsp:useBean id="quiz" scope="session" class="bean.quiz.QuizBean" scope="session"/>
 <jsp:useBean id="questionResponse" scope="session" class="bean.questionresponse.QuestionResponseBean" scope="session"/>
 <%
@@ -26,4 +25,3 @@ if (!loggedIn){
 	
 	response.sendRedirect("quiz_question.jsp");
 %>
-</HTML>
