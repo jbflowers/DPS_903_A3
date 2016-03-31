@@ -24,10 +24,6 @@ public class Question {
 	@ManyToOne
     private Quiz quiz;
 
-    // drop down case with inner questions
-    @OneToMany
-    private List<SubQuestion> subQuestions = new ArrayList<SubQuestion>();
-
     @OneToMany
     private List<Answer> Answers = new ArrayList<Answer>();
     
@@ -87,14 +83,6 @@ public class Question {
 		this.quiz = quiz;
 	}
 
-	public List<SubQuestion> getSubQuestions() {
-		return subQuestions;
-	}
-
-	public void setSubQuestions(List<SubQuestion> subQuestions) {
-		this.subQuestions = subQuestions;
-	}
-
 	public List<Answer> getAnswers() {
 		return Answers;
 	}
@@ -116,7 +104,6 @@ public class Question {
 		b.setAttemptsBeforeHint(a.getAttemptsBeforeHint());
 		b.setDifficulty(a.getDifficulty());
 		b.setHint(a.getHint());
-		b.setSubQuestions(a.getSubQuestions());
 		b.setText(a.getText());
 		b.setType(a.getType());
 		

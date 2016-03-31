@@ -18,9 +18,6 @@ public class Answer {
 	@ManyToOne
     private Question question;
 
-	@ManyToOne
-    private SubQuestion subQuestion;
-
 	public int getId() {
 		return id;
 	}
@@ -53,13 +50,6 @@ public class Answer {
 		this.question = question;
 	}
 	
-    public SubQuestion getSubQuestion() {
-		return subQuestion;
-	}
-
-	public void setSubQuestion(SubQuestion subQuestion) {
-		this.subQuestion = subQuestion;
-	}
 	
 	public Answer copy(Question question){
 		Answer a = this;

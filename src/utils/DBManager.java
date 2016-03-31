@@ -1,32 +1,24 @@
 package utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.NoResultException;
 
 import model.Answer;
 import model.Question;
 import model.QuestionResponse;
 import model.Quiz;
 import model.QuizResponse;
-import model.SubQuestion;
 import model.User;
-import model.Message;
 
 public class DBManager {
     
 	private final String PERSISTENCE_UNIT_NAME = "Models";
     private EntityManagerFactory factory;
 	private EntityManager em;
-	private boolean noEJB = false;
 	
 	public DBManager(){
 		factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
@@ -50,9 +42,6 @@ public class DBManager {
     public int commitQuiz(Quiz quiz){
     	for(Question question : quiz.getQuestions()){
     		commitQuestion(question);
-    	}
-    	for(Message message : quiz.getMessages()){
-    		commitMessage(message);
     	}
     	
     	em.getTransaction().begin();
@@ -183,29 +172,6 @@ public class DBManager {
     	return questionResponse;
     }
     
-    public List<SubQuestion> getSubQuestions(){
-    	
-    	List<SubQuestion> subQuestions = (List<SubQuestion>) em.createQuery("SELECT e FROM SubQuestion e").getResultList();
-    	
-    	return subQuestions;
-    }
-    
-    public int commitSubQuestion(SubQuestion subQuestion){
-    	
-    	em.getTransaction().begin();
-    	em.persist(subQuestion);
-    	em.getTransaction().commit();
-    	
-    	return subQuestion.getId();
-    }
-    
-    public SubQuestion getSubQuestionById(int id){
-    	
-    	SubQuestion subQuestion = (SubQuestion) em.find(SubQuestion.class, id);
-    	
-    	return subQuestion;
-    }
-    
     public List<Answer> getAnswers(){
     	
     	List<Answer> answers = (List<Answer>) em.createQuery("SELECT e FROM Answer e").getResultList();
@@ -227,29 +193,6 @@ public class DBManager {
     	Answer answer = (Answer) em.find(Answer.class, id);
     	
     	return answer;
-    }
-    
-    public List<Message> getMessages(){
-    	
-    	List<Message> messages = (List<Message>) em.createQuery("SELECT e FROM Message e").getResultList();
-    	
-    	return messages;
-    }
-    
-    public int commitMessage(Message message){
-    	
-    	em.getTransaction().begin();
-    	em.persist(message);
-    	em.getTransaction().commit();
-    	
-    	return message.getId();
-    }
-    
-    public Message getMessageById(int id){
-    	
-    	Message message = (Message) em.find(Message.class, id);
-    	
-    	return message;
     }
     
     public List<User> getUsers(){

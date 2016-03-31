@@ -18,9 +18,6 @@ public class Quiz {
     private Boolean allowHints;
     private String status = "in-progress";
 
-	@OneToMany
-    private List<Message> messages = new ArrayList<Message>();
-
 	@OneToOne
     private QuizResponse quizResponse;
 	
@@ -57,14 +54,6 @@ public class Quiz {
 
 	public void setAllowHints(Boolean allowHints) {
 		this.allowHints = allowHints;
-	}
-
-    public List<Message> getMessages() {
-		return messages;
-	}
-
-	public void setMessages(List<Message> messages) {
-		this.messages = messages;
 	}
 
     public List<Question> getQuestions() {
