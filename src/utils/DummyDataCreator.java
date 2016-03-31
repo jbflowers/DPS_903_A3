@@ -99,7 +99,7 @@ public class DummyDataCreator {
 		// Make third question
 		Question q3 = new Question();
 		
-		q3.setType("drop");
+		q3.setType("mc");
 		q3.setText("From this list, what is in fact a type of cat and not a flammable material?");
 		q3.setDifficulty("easy");
 		q3.setAttemptsBeforeHint(6);
@@ -153,15 +153,15 @@ public class DummyDataCreator {
 		// Make fifth question
 		Question q5 = new Question();
 		
-		q5.setType("text");
-		q5.setText("What is the most used text editor for Linux?");
+		q5.setType("number");
+		q5.setText("What is 2 + 2?");
 		q5.setDifficulty("medium");
 		q5.setAttemptsBeforeHint(6);
-		q5.setHint("It stands for VIsual iMproved");
+		q5.setHint("Its 4");
 		
 		Answer q5a1 = new Answer();
 		q5a1.setIsCorrect(true);
-		q5a1.setText("VIM");
+		q5a1.setText("4");
 		
 		ArrayList<Answer> q5Answers = new ArrayList<Answer>();
 		q5Answers.add(q5a1);
@@ -192,7 +192,7 @@ public class DummyDataCreator {
 		
 		Answer q6a4 = new Answer();
 		q6a4.setIsCorrect(false);
-		q6a4.setText("god");
+		q6a4.setText("good fish in the sea");
 		
 		ArrayList<Answer> q6Answers = new ArrayList<Answer>();
 		q6Answers.add(q6a1); q6Answers.add(q6a2); q6Answers.add(q6a3); q6Answers.add(q6a4);
