@@ -99,7 +99,7 @@
                             <td><%=question.getType()%></td>
                             <td><%=question.getDifficulty()%></td>
                             <td>
-                                <a href="question_create.jsp?id=<%=question.getId()%>&edit=true">Edit | </a>
+                                <a href="question_create.jsp?id=<%=question.getId()%>&edit=true">Edit</a> |
                                 <a href="instructor_table.jsp?id=<%=question.getId()%>&remove=true">Delete</a>
                             </td>
                         </tr>
