@@ -11,14 +11,23 @@
     Answer tempAnswer;
     int numOfChoices;
     String[] choices;
+    List<Answer> oldAnswers = new ArrayList<Answer>();
 %>
 <%
-    if (request.getParameter("text") != null && request.getParameter("edit") == null) {
-
+    if (request.getParameter("text") != null && request.getParameter("edit") != null) {
+        question.setIsEdit(false);
         // set possible choices / answers to this question
         numOfChoices = Integer.parseInt(request.getParameter("numberOfChoices"));
 
         choices = request.getParameterValues("choice[]");
+
+        oldAnswers = question.getAnswers();
+
+        System.out.println("attempting to clean bean");
+
+        for (Answer oldAnswer : oldAnswers){
+            question.removeAnswerById(oldAnswer.getId());
+        }
 
         for (int i = 0; i < numOfChoices; i++) {
             tempAnswer = new Answer();
@@ -34,6 +43,8 @@
             tempAnswers.add(tempAnswer);
         }
 
+        System.out.println("assigning new answers");
+
         question.setAnswers(tempAnswers);
 
         // finally redirect to save the question
@@ -44,8 +55,10 @@
     if (request.getParameter("edit") != null && request.getParameter("edit").equals("true")){
         System.out.println("trying to edit the page");
         question.setQuestion(question.getQuestionById(Integer.parseInt(request.getParameter("id"))));
+        question.setIsEdit(true);
     } else {
         question = new QuestionBean();
+        question.setIsEdit(false);
     }
 
 %>
@@ -424,7 +437,12 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Create a Quiz Question</h1>
+                <h1 class="page-header"><% if(request.getParameter("edit") != null && request.getParameter("edit").equals("true") ) { %>
+                    Edit
+                    <% } else { %>
+                    Create
+                    <% } %>
+                    a Quiz Question</h1>
                 <form method="POST">
                     <div class="form-group">
 
@@ -469,7 +487,14 @@
                             <input type="radio" name="correct0" value="false"> Incorrect
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-default">Create New Quiz Question</button>
+                    <button type="submit" class="btn btn-primary">
+                        <% if(request.getParameter("edit") != null && request.getParameter("edit").equals("true") ) { %>
+                        Edit
+                        <% } else { %>
+                        Create
+                        <% } %>
+                        New Quiz Question</button>
+                    <a href="instructor_table.jsp" class="btn btn-default">Back to List of Questions</a>
                 </form>
                 <%--<jsp:getProperty name="quiz" property="currentQuestion"/>--%>
             </div>
@@ -542,7 +567,7 @@
                     copy.insertBefore(button);
                 }
             } else {
-                for(i=choices; i>number-1; i--){
+                for(i=choices; i>number-1 && i > 1; i--){
                     $($(".choice")[i]).remove();
                 }
             }
