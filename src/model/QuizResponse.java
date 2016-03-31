@@ -76,6 +76,14 @@ public class QuizResponse {
 		this.questionResponses = questionResponses;
 	}
 
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
+	}
+
     public QuizResponse(){
         super();
     }

@@ -14,7 +14,6 @@
         question.commitQuestion();
     }
 
-    Thread.sleep(5000); // sleep 1 seconds
     response.sendRedirect("instructor_table.jsp");
 %>
 </HTML>
