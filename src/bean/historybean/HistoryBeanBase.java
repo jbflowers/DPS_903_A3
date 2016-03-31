@@ -21,7 +21,7 @@ public class HistoryBeanBase implements HistoryCommonBusiness{
 
 	@Override
 	public List<QuizResponse> getQuizResponsesForUser() {
-		return user.getQuizResponses();
+		return dbm.getQuizResponsesForUser(user);
 	}
 
 	@Override
