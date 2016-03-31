@@ -1,6 +1,8 @@
-<%@ page import="model.Question" %>
+<%@ page import="model.Question" 
+%>
+<%@ page import="java.util.List" %>
 <jsp:useBean id="instructor" scope="session" class="bean.instructor.InstructorBean"/>
-
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1. %>
 <% if(session != null && ((session.getAttribute("userid") != null ) || (session.getAttribute("userid") != ""))
         && ((session.getAttribute("role") != null) && session.getAttribute("role") != "")) {
     if (session.getAttribute("role").equals("admin")) { %>
@@ -89,7 +91,9 @@
                     <tbody>
                         <%
                             counter = 0;
-                            for(Question question : instructor.getAllQuestions()){
+                        	List<Question> questions = instructor.getAllQuestions();
+                            for(int i = 0; i < questions.size(); i++){
+                            	Question question = questions.get(i);
                                 if(!question.isUsedInQuiz()){
                                     counter++;
                         %>

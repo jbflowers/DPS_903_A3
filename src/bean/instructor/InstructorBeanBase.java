@@ -8,21 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InstructorBeanBase implements InstructorCommonBusiness {
-	protected List<Question> questions;
 	protected DBManager dbm;
 	
 	public InstructorBeanBase(){
 		// Initialize db manager and other fields
 		dbm = new DBManager();
 
-		// Make questions
-		List<Question> questions = new ArrayList<Question>();
-
 	}
 	
 	@Override
 	public List<Question> getAllQuestions(){
-		return questions = dbm.getQuestions();
+		dbm.close();
+		dbm = new DBManager();
+		return dbm.getQuestions();
 	}
 
 	@Override

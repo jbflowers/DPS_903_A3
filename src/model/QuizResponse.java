@@ -24,6 +24,8 @@ public class QuizResponse {
 
     @OneToMany
     private List<QuestionResponse> questionResponses = new ArrayList<QuestionResponse>();
+
+    private long timestamp = System.currentTimeMillis();
     
     String userId;
     

@@ -82,9 +82,9 @@ public class DBManager {
     }
     
     public List<Question> getQuestions(){
-    	
+    	em.getTransaction().begin();
     	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e").getResultList();
-    	
+    	em.getTransaction().commit();
     	return questions;
     }
     
@@ -298,17 +298,13 @@ public class DBManager {
     	
     	DBManager m = new DBManager();
     	
-    	Quiz quiz = new Quiz();
-    	
-    	quiz.setName("Quiz 1");
-    	quiz.setDescription("A dummy quiz");
-    	quiz.setAllowHints(false);
-    	
-    	int id = m.commitQuiz(quiz);
-    	
     	try {
-    		Quiz result = m.getQuizById(id);
-    		System.out.println("Quiz name is: " + result.getName());
+    		List<Question> questions = m.getQuestions();
+    		for(Question question : questions){
+    			if (!question.isUsedInQuiz()){
+    				System.out.println("Question text: " + question.getText());
+    			}
+    		}
     	}
     	finally{
     		//m.close();
