@@ -21,8 +21,6 @@ public class QuestionResponse {
     private int questionId;
     
     private boolean isCorrect = false;
-    
-    private long timestamp = System.currentTimeMillis();
 
 	// Can be an id pointing to an answer or a text response depending on question type
     private String[] questionResponse;
@@ -66,12 +64,5 @@ public class QuestionResponse {
     public QuestionResponse(){
         super();
     }
-    
-	public long getTimestamp() {
-		return timestamp;
-	}
 
-	public void setTimestamp(long timestamp) {
-		this.timestamp = timestamp;
-	}
 }

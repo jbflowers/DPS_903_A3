@@ -5,7 +5,7 @@
 <% if(session != null && ((session.getAttribute("userid") != null ) || (session.getAttribute("userid") != ""))
         && ((session.getAttribute("role") != null) && session.getAttribute("role") != "")) {
     if (!session.getAttribute("role").equals("admin")) {
-        history.setUser((String)session.getAttribute("userId"));
+        history.setUser((String)session.getAttribute("userid"));
     }
 %>
 <%! List<QuizResponse> quizResponses; %>

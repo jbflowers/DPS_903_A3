@@ -24,8 +24,10 @@ public class QuizResponse {
 
     @OneToMany
     private List<QuestionResponse> questionResponses = new ArrayList<QuestionResponse>();
-    
-    public int getId() {
+
+	private long timestamp = System.currentTimeMillis();
+
+	public int getId() {
 		return id;
 	}
 
@@ -63,6 +65,14 @@ public class QuizResponse {
 
 	public void setQuestionResponses(List<QuestionResponse> questionResponses) {
 		this.questionResponses = questionResponses;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 
     public QuizResponse(){
