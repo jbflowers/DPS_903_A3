@@ -250,7 +250,7 @@ public class DBManager {
     }
 
     public List<QuizResponse> getQuizResponsesForUser(User user){
-    	String query = "SELECT e FROM QuizResponse e WHERE e.userId=" + user.getEmail();
+    	String query = "SELECT e FROM QuizResponse e WHERE e.userId='" + user.getEmail() + "'";
     	List<QuizResponse> quizResponses = em.createQuery(query).getResultList();
     	return quizResponses;
     }
