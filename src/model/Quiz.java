@@ -17,6 +17,7 @@ public class Quiz {
     private String description;
     private Boolean allowHints;
     private String status = "in-progress";
+    private long timestamp = System.currentTimeMillis();
 
 	@OneToOne
     private QuizResponse quizResponse;
@@ -79,6 +80,14 @@ public class Quiz {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+    
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 	
 	public Quiz(){ super(); }
