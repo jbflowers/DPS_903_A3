@@ -50,7 +50,7 @@
 
 <div id="wrapper">
 
-    <!-- Navigation -->
+    <!-- Navbar -->
     <jsp:include page="navbar.jsp" />
 
     <div id="page-wrapper">
