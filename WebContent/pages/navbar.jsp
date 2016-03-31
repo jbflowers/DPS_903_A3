@@ -1,5 +1,8 @@
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<% if(session != null && ((session.getAttribute("userid") != null )&& (session.getAttribute("userid") != ""))
+        && ((session.getAttribute("role") != null) && session.getAttribute("role") != "")) {
+    System.out.println(session.getAttribute("userid")); %>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -246,7 +249,7 @@
                             <li> <a href="question_create.jsp">Questions</a></li>
                             <li> <a href="#"> All Quizes </a></li>
                         <% } else { %>
-                            <li><a href="take_quiz.html">Take Quiz</a></li>
+                            <li><a href="take_quiz.jsp">Take Quiz</a></li>
                             <li><a href="#">View My Marks </a></li>
                         <% } %>
                     </ul>
@@ -261,7 +264,7 @@
                             <li> <a href="question_create.jsp"> Result Chart </a></li>
                             <li> <a href="#"> Metrics </a></li>
                         <% } else { %>
-                            <li><a href="take_quiz.html">My Marks</a></li>
+                            <li><a href="take_quiz.jsp">My Marks</a></li>
                             <li><a href="#"> Statistics </a></li>
                         <% } %>
                     </ul>
@@ -340,3 +343,4 @@
     </div>
     <!-- /.navbar-static-side -->
 </nav>
+ <% } else { response.sendRedirect("login.jsp"); } %>

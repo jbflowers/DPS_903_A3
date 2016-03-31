@@ -26,9 +26,7 @@
                 session.setAttribute("role", request.getParameter("role"));
 
                 // Redirect according to "role"
-                if (user.getRole(email).equals("admin")) {
-                    response.sendRedirect("question_create.jsp");
-                } else response.sendRedirect("take_quiz.html");
+                response.sendRedirect("index.jsp");
             } else response.sendRedirect("register.jsp");
         } else {
             session.setAttribute("error", "Username Exists");

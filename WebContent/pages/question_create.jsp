@@ -3,6 +3,18 @@
 <%@ page import="java.util.List" %>
 <%@ page import="bean.question.QuestionBean" %>
 <jsp:useBean id="question" scope="session" class="bean.question.QuestionBean"/>
+
+<% boolean loggedIn = request.getSession().getAttribute("userid") != null;
+
+    if (!loggedIn){
+        // Redirect
+        response.sendRedirect("login.jsp");
+    } else {
+        if (session.getAttribute("role").equals("student")){
+        response.sendRedirect("index.jsp");
+        }
+    }
+    %>
 <!DOCTYPE html>
 <html lang="en">
 <%!

@@ -1,5 +1,5 @@
-<jsp:useBean id="quiz" scope="session" class="bean.quiz.QuizBean" scope="session"/>
-<jsp:useBean id="questionResponse" scope="session" class="bean.questionresponse.QuestionResponseBean" scope="session"/>
+<jsp:useBean id="quiz" class="bean.quiz.QuizBean" scope="session"/>
+<jsp:useBean id="questionResponse" scope="session" class="bean.questionresponse.QuestionResponseBean" />
 
 <%
 // Check if user is logged in
@@ -14,7 +14,6 @@ else{
 	// Redirect
 	response.sendRedirect("login.jsp");
 }
-
 
 %>
 
