@@ -6,7 +6,6 @@
     System.out.println(question.getType());
     System.out.println(question.getDifficulty());
 
-
     if(question.getIsEdit() == true){
         question.setIsEdit(false);
         question.updateQuestion();

@@ -26,7 +26,7 @@
     List<Answer> oldAnswers;
 %>
 <%
-    if (request.getParameter("text") != null && request.getParameter("edit") != null) {
+    if (request.getParameter("text") != null) {
         oldAnswers = new ArrayList<Answer>();
         tempAnswers = new ArrayList<Answer>();
         question.setIsEdit(false);
