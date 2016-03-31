@@ -11,5 +11,6 @@ public interface UserCommonBusiness {
     void setPassword(String password);
     String getEmail();
     String getRole(String email);
+    String getName();
 
 }
