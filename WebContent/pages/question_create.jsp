@@ -19,18 +19,29 @@
 <html lang="en">
 <%!
     // temporary variables
-    List<Answer> tempAnswers = new ArrayList<Answer>();
+    List<Answer> tempAnswers;
     Answer tempAnswer;
     int numOfChoices;
     String[] choices;
+    List<Answer> oldAnswers;
 %>
 <%
-    if (request.getParameter("text") != null && request.getParameter("edit") == null) {
-
+    if (request.getParameter("text") != null && request.getParameter("edit") != null) {
+        oldAnswers = new ArrayList<Answer>();
+        tempAnswers = new ArrayList<Answer>();
+        question.setIsEdit(false);
         // set possible choices / answers to this question
         numOfChoices = Integer.parseInt(request.getParameter("numberOfChoices"));
 
         choices = request.getParameterValues("choice[]");
+
+        oldAnswers = question.getAnswers();
+
+        System.out.println("attempting to clean bean");
+
+        for (Answer oldAnswer : oldAnswers){
+            question.removeAnswerById(oldAnswer.getId());
+        }
 
         for (int i = 0; i < numOfChoices; i++) {
             tempAnswer = new Answer();
@@ -46,6 +57,8 @@
             tempAnswers.add(tempAnswer);
         }
 
+        System.out.println("assigning new answers");
+
         question.setAnswers(tempAnswers);
 
         // finally redirect to save the question
@@ -56,8 +69,10 @@
     if (request.getParameter("edit") != null && request.getParameter("edit").equals("true")){
         System.out.println("trying to edit the page");
         question.setQuestion(question.getQuestionById(Integer.parseInt(request.getParameter("id"))));
+        question.setIsEdit(true);
     } else {
         question = new QuestionBean();
+        question.setIsEdit(false);
     }
 
 %>
@@ -107,7 +122,12 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Create a Quiz Question</h1>
+                <h1 class="page-header"><% if(request.getParameter("edit") != null && request.getParameter("edit").equals("true") ) { %>
+                    Edit
+                    <% } else { %>
+                    Create
+                    <% } %>
+                    a Quiz Question</h1>
                 <form method="POST">
                     <div class="form-group">
 
@@ -152,7 +172,14 @@
                             <input type="radio" name="correct0" value="false"> Incorrect
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-default">Create New Quiz Question</button>
+                    <button type="submit" class="btn btn-primary">
+                        <% if(request.getParameter("edit") != null && request.getParameter("edit").equals("true") ) { %>
+                        Edit
+                        <% } else { %>
+                        Create
+                        <% } %>
+                        New Quiz Question</button>
+                    <a href="instructor_table.jsp" class="btn btn-default">Back to List of Questions</a>
                 </form>
                 <%--<jsp:getProperty name="quiz" property="currentQuestion"/>--%>
             </div>
@@ -185,24 +212,47 @@
 <script>
     $(function() {
 
-        function checkChoiceNumber(){
-            console.log("key up event here");
-            var number = parseInt($(this).val()), i=0, choices = $(".choice").length, copy, button;
+        function checkChoiceNumber(repopulate){
+            console.log("checking number of choices...");
+            var number = parseInt($("#numberOfChoices").val()), i=0, choices = $(".choice").length, copy, button, answers=[], correct=[];
+
+            <%
+
+             for(Answer answer: question.getAnswers()){
+            %>
+                answers.push("<%=answer.getText()%>");
+                correct.push("<%=answer.getIsCorrect()%>");
+            <%
+             }
+
+            %>
+
 
             if(choices < number){
                 for(i=choices; i<number; i++){
+
                     copy = $($(".choice")[0]).clone(true, true);
+
+                    // Label for Choice...
                     $(copy.find("label")[0]).attr("for", "choice"+(i)).html("Choice #"+(i+1)+(": "));
-                    $(copy.find("input")[0]).attr("id", "choice"+(i));
-                    $(copy.find("input")[1]).attr("name", "correct"+(i));
-                    $(copy.find("input")[2]).attr("name", "correct"+(i));
+
+                    // id for choice input
+                    $(copy.find("input")[0]).attr("id", "choice"+(i)).val("");
+
+                    // correct radio
+                    $(copy.find("input")[1]).attr("name", "correct"+(i))
+                            .removeAttr("selected").prop("checked", false);
+
+                    // incorrect radio
+                    $(copy.find("input")[2]).attr("name", "correct"+(i))
+                            .removeAttr("selected").prop("checked", false);
 
                     button = $($("button")[$("button").length-1]);
 
                     copy.insertBefore(button);
                 }
             } else {
-                for(i=choices; i>number-1; i--){
+                for(i=choices; i>number-1 && i > 0 ; i--){
                     $($(".choice")[i]).remove();
                 }
             }
@@ -213,6 +263,23 @@
             } else {
                 $(".choice").hide();
             }
+
+            for(i=0; i<number && repopulate; i++){
+                if(answers[i]){
+                    $($($(".choice")[i]).find("input")[0]).val(answers[i]);
+                }
+
+                if(correct[i]){
+                    if(correct[i] === "true"){
+                        $($($(".choice")[i]).find("input")[1]).attr("selected", "true");
+                        $($($(".choice")[i]).find("input")[1]).prop("checked", "true");
+                    } else {
+                        $($($(".choice")[i]).find("input")[2]).attr("selected", "true");
+                        $($($(".choice")[i]).find("input")[2]).prop("checked", "true");
+                    }
+                }
+            }
+
         }
 
 
@@ -233,7 +300,7 @@
 
         });
 
-        checkChoiceNumber();
+        checkChoiceNumber(true);
 
         $('#numberOfChoices').on("keyup change", checkChoiceNumber);
     })

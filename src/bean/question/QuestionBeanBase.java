@@ -17,7 +17,7 @@ public class QuestionBeanBase implements QuestionCommonBusiness{
     private Question question;
     protected DBManager dbm;
 	private EntityManager em;
-    
+    private boolean isEdit;
     
     public QuestionBeanBase(){
         System.out.println("Constructing a question...");
@@ -33,6 +33,14 @@ public class QuestionBeanBase implements QuestionCommonBusiness{
     @Override
     public Question getQuestionById(int id){
         return dbm.getQuestionById(id);
+    }
+
+    public void setIsEdit(boolean isEdit){
+        this.isEdit = isEdit;
+    }
+
+    public boolean getIsEdit(){
+        return isEdit;
     }
 
     @Override
@@ -121,9 +129,17 @@ public class QuestionBeanBase implements QuestionCommonBusiness{
     }
 
     @Override
+    public void removeAnswerById(int id){
+        dbm.removeAnswerById(id);
+    }
+
+    @Override
     public void commitQuestion(){
         dbm.commitQuestion(question);
     }
+
+    @Override
+    public void updateQuestion() { dbm.updateQuestion(question); }
 
     @PreDestroy
     public void destroy(){

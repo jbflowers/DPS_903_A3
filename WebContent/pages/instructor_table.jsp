@@ -70,13 +70,13 @@
     <jsp:include page="navbar.jsp" />
 
     <jsp:setProperty name="instructor" property="*" />
-    <%! int counter=0; %>
+    <%! int counter; %>
     <div id="page-wrapper">
 
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">List of Quiz Questions</h1>
-                <table class="table-striped">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -87,9 +87,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% for(Question question : instructor.getAllQuestions()){
-                            if(!question.isUsedInQuiz()){
-                            	counter++;
+                        <%
+                            counter = 0;
+                            for(Question question : instructor.getAllQuestions()){
+                                if(!question.isUsedInQuiz()){
+                                    counter++;
                         %>
                         <tr>
                             <td><%=counter%></td>
@@ -97,12 +99,11 @@
                             <td><%=question.getType()%></td>
                             <td><%=question.getDifficulty()%></td>
                             <td>
-                                <a href="question_create.jsp?id=<%=question.getId()%>&edit=true">Edit</a>
+                                <a href="question_create.jsp?id=<%=question.getId()%>&edit=true">Edit | </a>
                                 <a href="instructor_table.jsp?id=<%=question.getId()%>&remove=true">Delete</a>
                             </td>
                         </tr>
-                        <% }
-                        } %>
+                        <% } } %>
                     </tbody>
                 </table>
                 <%--<jsp:getProperty name="quiz" property="currentQuestion"/>--%>

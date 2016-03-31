@@ -129,6 +129,17 @@ public class DBManager {
     	int randNum = rand.nextInt((questions.size()-1) + 1);
     	return questions.get(randNum);
     }
+
+	public void updateQuestion(Question question){
+		em.getTransaction().begin();
+
+		for(Answer answer: question.getAnswers()){
+			em.persist(answer);
+		}
+		//em.merge(question);
+
+		em.getTransaction().commit();
+	}
     
     public int commitQuestion(Question question){
     	
@@ -137,6 +148,7 @@ public class DBManager {
     		em.persist(answer);
     	}
     	em.persist(question);
+
     	em.getTransaction().commit();
     	
     	return question.getId();
@@ -245,12 +257,27 @@ public class DBManager {
 
 	public void removeQuestionById(int id){
 		Question question = getQuestionById(id);
+		if(question != null){
+			em.getTransaction().begin();
 
-		em.getTransaction().begin();
+			em.remove(question);
 
-		em.remove(question);
+			em.getTransaction().commit();
+		}
 
-		em.getTransaction().commit();
+	}
+
+	public void removeAnswerById(int id){
+		Answer answer = getAnswerById(id);
+
+		if(answer != null){
+			em.getTransaction().begin();
+
+			em.remove(answer);
+
+			em.getTransaction().commit();
+		}
+
 	}
 
     public void close(){

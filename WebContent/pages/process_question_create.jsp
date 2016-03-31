@@ -6,9 +6,15 @@
     System.out.println(question.getType());
     System.out.println(question.getDifficulty());
 
-    question.commitQuestion();
+
+    if(question.getIsEdit() == true){
+        question.setIsEdit(false);
+        question.updateQuestion();
+    } else {
+        question.commitQuestion();
+    }
 
     Thread.sleep(5000); // sleep 1 seconds
-    response.sendRedirect("question_create.jsp");
+    response.sendRedirect("instructor_table.jsp");
 %>
 </HTML>

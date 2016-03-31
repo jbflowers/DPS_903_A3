@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface QuestionCommonBusiness {
 
+    void updateQuestion();
+
+    void removeAnswerById(int id);
+
     void populateQuestionById(int id);
 
     int getNumberOfChoices();

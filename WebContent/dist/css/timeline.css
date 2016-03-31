@@ -4,6 +4,10 @@
     list-style: none;
 }
 
+td, th {
+    padding: 5px !important;
+}
+
 .timeline:before {
     content: " ";
     position: absolute;
