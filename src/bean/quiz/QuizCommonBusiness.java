@@ -4,10 +4,10 @@ import model.Question;
 import model.QuizResponse;
 
 public interface QuizCommonBusiness {
-	int getCurrentQuestionNumber();
-	Question getCurrentQuestion();
-	void nextQuestion();
-	void completeQuiz();
+	public int getCurrentQuestionNumber();
+	public Question getCurrentQuestion();
+	public void nextQuestion();
+	public void completeQuiz();
 	public QuizResponse getQuizResponse();
 	public void setUser(String email);
 }

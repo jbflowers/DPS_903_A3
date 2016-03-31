@@ -28,7 +28,7 @@ if (!loggedIn){
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Quiz Question <jsp:getProperty name="quiz" property="currentQuestionNumber"/> </title>
+    <title>Quiz Results</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
