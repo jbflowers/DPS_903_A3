@@ -19,6 +19,12 @@ else{
 <!DOCTYPE html>
 <html lang="en">
 <% 
+
+	// If the current question is 0, then start the bean;
+	if(quiz.getCurrentQuestionNumber() == 1 && questionResponse.getAttempt() == 0){
+		quiz.start();
+	}
+	
 	// Determine whether we've been provided empty input or a wrong answer
 	boolean emptyInput = false;
 	boolean failedAttempt = questionResponse.isLastAttemptWrong();	
@@ -48,6 +54,7 @@ else{
 	// Finally if we weren't redirected, increment attempts
 	if (!redirect)
 		questionResponse.incrementAttempts();
+	
 %>
 
 <head>

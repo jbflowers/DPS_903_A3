@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PreDestroy;
+import javax.faces.context.FacesContext;
 
 import model.Answer;
 import model.Question;
@@ -15,13 +16,17 @@ import utils.DBManager;
 
 public class QuizBeanBase implements QuizCommonBusiness{
 	private int currentQuestionNumber;
-	private long startTime = System.currentTimeMillis();
+	private long startTime;
 	protected Quiz quiz;
 	protected DBManager dbm;
 	private QuizResponse quizResponse;
 	private User user;
 	
 	public QuizBeanBase(){
+		init();
+	}
+	
+	private void init(){
 		// Initialize db manager and other fields
 		dbm = new DBManager();
 		currentQuestionNumber = 1;
@@ -29,9 +34,6 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		// Make your quiz
 		quiz = new Quiz();
 		quizResponse = new QuizResponse();
-		
-		// In order to be here in the first place, you must be logged in, so set user
-		quizResponse.setUser(user);
 
 		// Make questions
 		List<Question> tempQuestions = new ArrayList<Question>();
@@ -91,6 +93,14 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		dbm.commitQuiz(quiz);
 	}
 	
+	public void start(){
+		// In order to be here in the first place, you must be logged in, so set user
+		quizResponse.setUser(user);
+		
+		// And start the clock
+		startTime = System.currentTimeMillis();
+	}
+	
 	@Override
 	synchronized public int getCurrentQuestionNumber() {
 		return currentQuestionNumber;
@@ -105,11 +115,6 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		else{
 			return quiz.getQuestions().get(5);
 		}
-	}
-	
-	@PreDestroy
-	public void destory(){
-		dbm.close();
 	}
 
 	@Override
@@ -184,8 +189,9 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		quiz.setStatus("incomplete");
 		dbm.commitQuiz(quiz);
 	}
-	
-	
-	
 
+	@Override
+	public void reset() {
+		init();
+	}
 }
