@@ -15,12 +15,7 @@
             session.setAttribute("userid", email);
             session.setAttribute("role", user.getRole(email));
             session.setAttribute("loginerror", null);
-
-            // Set session and redirect to pages
-            if (user.getRole(email).equals("admin")) {
-             response.sendRedirect("question_create.jsp");
-            } else response.sendRedirect("take_quiz.html");
-
+            response.sendRedirect("index.jsp");
         }  else {
             session.setAttribute("loginerror", "Invalid credentials");
             response.sendRedirect("login.jsp");
