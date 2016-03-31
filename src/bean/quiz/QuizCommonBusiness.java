@@ -10,4 +10,6 @@ public interface QuizCommonBusiness {
 	public void completeQuiz();
 	public QuizResponse getQuizResponse();
 	public void setUser(String email);
+	public long getTimeLeft();
+	public void timeoutQuiz();
 }

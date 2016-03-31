@@ -1,6 +1,5 @@
 <jsp:useBean id="quiz" scope="session" class="bean.quiz.QuizBean" scope="session"/>
 <jsp:useBean id="questionResponse" scope="session" class="bean.questionresponse.QuestionResponseBean" scope="session"/>
-
 <%
 // Check if user is logged in
 
@@ -567,6 +566,22 @@ else{
 	                <!-- /.panel panel-primary -->
 	            </div>
 	            <!-- /.col-lg-6 -->
+	           <div class="col-lg-2">
+	            </div>
+	            <div class="col-lg-4">
+					<div class="panel panel-red">
+                        <div class="panel-heading">
+                           	Time Left
+                        </div>
+                        <div id="timer_div" class="panel-body">
+                           20:00 
+                        </div>
+                        <div class="panel-footer">
+                        </div>
+                    </div>
+	            </div>
+	            
+	            
             </div>
             <!-- /.row -->
            
@@ -596,6 +611,28 @@ else{
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
+
+	<script>
+	var seconds_left = <%= quiz.getTimeLeft() %>;
+	var interval = setInterval(function() {
+	    seconds_left--;
+	    
+		var minutes = parseInt(seconds_left / 60);
+		var seconds = parseInt(seconds_left - (minutes * 60));
+		
+		if (seconds < 10){
+			seconds = String("0" + seconds);
+		}
+		
+		document.getElementById('timer_div').innerHTML = minutes + ":" + seconds
+
+	    if (seconds_left <= 0)
+	    {
+	    	window.location.href = "quiz_timeout.jsp";
+	    }
+	    
+	}, 1000);
+	</script>
 
 </body>
 

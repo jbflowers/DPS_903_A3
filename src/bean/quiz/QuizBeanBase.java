@@ -15,6 +15,7 @@ import utils.DBManager;
 
 public class QuizBeanBase implements QuizCommonBusiness{
 	private int currentQuestionNumber;
+	private long startTime = System.currentTimeMillis();
 	protected Quiz quiz;
 	protected DBManager dbm;
 	private QuizResponse quizResponse;
@@ -165,6 +166,23 @@ public class QuizBeanBase implements QuizCommonBusiness{
 		if (user == null){
 			user = dbm.getUserByEmail(email);
 		}
+	}
+
+	@Override
+	public long getTimeLeft() {
+		long currentTime = System.currentTimeMillis();
+		long difference = currentTime - startTime;
+		long twentyMinutes = 20 * 60 * 1000;
+		
+		return (twentyMinutes - difference) / 1000;
+	}
+
+	@Override
+	public void timeoutQuiz() {
+		completeQuiz();
+		currentQuestionNumber = 7;
+		quiz.setStatus("incomplete");
+		dbm.commitQuiz(quiz);
 	}
 	
 	
