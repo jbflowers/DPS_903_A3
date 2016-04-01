@@ -8,17 +8,8 @@
     if (session.getAttribute("role").equals("admin")) { %>
         <!DOCTYPE html>
         <html lang="en">
-<%!
-    /*
-    // temporary variables
-    List<Answer> tempAnswers = new ArrayList<Answer>();
-    Answer tempAnswer;
-    int numOfChoices;
-    String[] choices;
-    */
-%>
 <%
-
+    // check if we need to remove, else display the page
     if (request.getParameter("remove") != null && request.getParameter("remove").equals("true")){
         System.out.println("attempting to remove id: " + request.getParameter("id"));
         instructor.removeQuestionById(Integer.parseInt(request.getParameter("id")));
@@ -137,64 +128,8 @@
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
 
-<!-- Custom Form Code -->
-<script>
-    /*
-    $(function() {
-        $('#type').change(function(){
-            switch( $(this).val()){
-                case "mc" || "drop":
-                    console.log("mc or dropdown");
-                    break;
-                case "number" || "text":
-                    console.log("num or txt");
-                    break;
-                case "check":
-                    console.log("checkbox");
-                    break;
-                default:
-                    console.log("default nada");
-            }
-
-        });
-
-        $('#numberOfChoices').on("keyup", function(){
-            console.log("key up event here");
-            var number = parseInt($(this).val()), i=0, choices = $(".choice").length, copy, button;
-
-            if(choices < number){
-                for(i=choices; i<number; i++){
-                    copy = $($(".choice")[0]).clone(true, true);
-                    $(copy.find("label")[0]).attr("for", "choice"+(i)).html("Choice #"+(i+1)+(": "));
-                    $(copy.find("input")[0]).attr("id", "choice"+(i));
-                    $(copy.find("input")[1]).attr("name", "correct"+(i));
-                    $(copy.find("input")[2]).attr("name", "correct"+(i));
-
-                    button = $($("button")[$("button").length-1]);
-
-                    copy.insertBefore(button);
-                }
-            } else {
-                for(i=choices; i>number-1; i--){
-                    $($(".choice")[i]).remove();
-                }
-            }
-
-
-            if(number >= 1){
-                $(".choice").show();
-            } else {
-                $(".choice").hide();
-            }
-
-
-        });
-    })
-    */
-</script>
-
 </body>
 
 </html>
-    <% } else { response.sendRedirect("index.jsp");}
-    }else {response.sendRedirect("login.jsp");} %>
+<% } else { response.sendRedirect("index.jsp");}
+}else {response.sendRedirect("login.jsp");} %>

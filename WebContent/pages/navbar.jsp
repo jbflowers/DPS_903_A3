@@ -261,11 +261,8 @@
                     <ul class="nav nav-second-level">
                         <% if (session.getAttribute("role").equals("admin")){ %>
                             <li> <a href="history_table.jsp"> View Student Marks </a> </li>
-                            <li> <a href="question_create.jsp"> Result Chart </a></li>
-                            <li> <a href="#"> Metrics </a></li>
                         <% } else { %>
                             <li><a href="history_table.jsp">My Marks</a></li>
-                            <li><a href="history_table.jsp"> Statistics </a></li>
                         <% } %>
                     </ul>
                     <!-- /.nav-second-level -->

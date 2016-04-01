@@ -90,21 +90,21 @@ public class DBManager {
     
     public List<Question> getEasyQuestions(){
     	
-    	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e WHERE e.difficulty='easy'").getResultList();
+    	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e WHERE e.difficulty='easy' AND e.usedInQuiz = FALSE").getResultList();
     	
     	return questions;
     }
     
     public List<Question> getMediumQuestions(){
     	
-    	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e WHERE e.difficulty='medium'").getResultList();
+    	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e WHERE e.difficulty='medium' AND e.usedInQuiz = FALSE").getResultList();
     	
     	return questions;
     }
     
     public List<Question> getHardQuestions(){
     	
-    	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e WHERE e.difficulty='hard'").getResultList();
+    	List<Question> questions = (List<Question>) em.createQuery("SELECT e FROM Question e WHERE e.difficulty='hard' AND e.usedInQuiz = FALSE").getResultList();
     	
     	return questions;
     }

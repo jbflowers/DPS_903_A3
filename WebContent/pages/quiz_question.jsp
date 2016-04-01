@@ -179,7 +179,6 @@ else{
 			                    
 			                    <div class="form-group">
 		                            <input class="form-control" type="number" name="questionResponse">
-		                            <p class="help-block">Example block-level help text here.</p>
 		                        </div>
 			                    
 			                    <%}

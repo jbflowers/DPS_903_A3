@@ -86,7 +86,7 @@
                     <tr>
                         <th>#</th>
                         <th>Mark Received</th>
-                        <th>Time took (minutes)</th>
+                        <th>Time took (seconds)</th>
                         <th>User</th>
                         <th>Quiz Id</th>
                     </tr>
@@ -105,7 +105,7 @@
                     <tr>
                         <td><%=counter%></td>
                         <td><%=quizResponse.getMark()%></td>
-                        <td><%=(quizResponse.getTimestamp() - quizResponse.getQuiz().getTimestamp())/1000/60%></td>
+                        <td><%=(quizResponse.getTimestamp() - quizResponse.getQuiz().getTimestamp())/1000%></td>
                         <td><%=quizResponse.getUser().getEmail()%></td>
                         <td><%=quizResponse.getQuiz().getId()%></td>
                     </tr>
@@ -138,62 +138,6 @@
 <script src="../bower_components/raphael/raphael-min.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
-
-<!-- Custom Form Code -->
-<script>
-    /*
-     $(function() {
-     $('#type').change(function(){
-     switch( $(this).val()){
-     case "mc" || "drop":
-     console.log("mc or dropdown");
-     break;
-     case "number" || "text":
-     console.log("num or txt");
-     break;
-     case "check":
-     console.log("checkbox");
-     break;
-     default:
-     console.log("default nada");
-     }
-
-     });
-
-     $('#numberOfChoices').on("keyup", function(){
-     console.log("key up event here");
-     var number = parseInt($(this).val()), i=0, choices = $(".choice").length, copy, button;
-
-     if(choices < number){
-     for(i=choices; i<number; i++){
-     copy = $($(".choice")[0]).clone(true, true);
-     $(copy.find("label")[0]).attr("for", "choice"+(i)).html("Choice #"+(i+1)+(": "));
-     $(copy.find("input")[0]).attr("id", "choice"+(i));
-     $(copy.find("input")[1]).attr("name", "correct"+(i));
-     $(copy.find("input")[2]).attr("name", "correct"+(i));
-
-     button = $($("button")[$("button").length-1]);
-
-     copy.insertBefore(button);
-     }
-     } else {
-     for(i=choices; i>number-1; i--){
-     $($(".choice")[i]).remove();
-     }
-     }
-
-
-     if(number >= 1){
-     $(".choice").show();
-     } else {
-     $(".choice").hide();
-     }
-
-
-     });
-     })
-     */
-</script>
 
 </body>
 
